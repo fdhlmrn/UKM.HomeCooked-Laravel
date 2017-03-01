@@ -59,17 +59,6 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="daftar-sebagai" class="col-md-4 control-label">Daftar sebagai:</label>
-                            <div class="col-md-6">
-                                <input  type="radio" name="radio" value="penjual" {{ $user->hasRole('penjual') ? 'checked' : '' }} > Penjual
-
-                                <input type="radio" name="radio" value="pembeli" {{ $user->hasRole('pembeli') ? 'checked' : '' }} > Pembeli
-                            </div>
-                        </div>
-
-
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
