@@ -18,9 +18,7 @@ class FoodsTable extends Migration
           $table->integer('user_id')->index()->unsigned();
           $table->string('nama_makanan');
           $table->integer('saiz_hidangan');
-          $table->string('gambar');
           $table->double('harga');
-          $table->string('status');
           $table->timestamps();
 
             //foreign key

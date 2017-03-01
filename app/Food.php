@@ -8,10 +8,16 @@ class Food extends Model
 {
     //
     protected $fillable = [
-      'nama_makanan', 'saiz_hidangan', 'gambar', 'harga', 'status'
+      'nama_makanan', 'saiz_hidangan', 'harga'
     ];
 
-    public function jualan(){
-      return $this->belongsToMany(Jualan::class);
+
+    public function user(){
+      return $this->belongsTo(User::class);
+    }
+
+    public function pivots(){
+      return $this->belongsToMany(User::class, 'likes');
+
     }
 }

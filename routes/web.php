@@ -16,10 +16,25 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware'=> ['auth']], function() {
-    Route::get('/sales', 'SalesController@index');
+    Route::get('/home', 'HomeController@index');
+
+    //food
+    Route::get('/foods', 'FoodsController@index');
+    Route::get('/foods/create', 'FoodsController@create');
+    Route::post('/foods', 'FoodsController@store');
+    Route::get('/foods/{food}', 'FoodsController@show');
+    Route::get('/foods/{food}/edit', 'FoodsController@edit');
+    Route::patch('/foods/{food}', 'FoodsController@update');
+    Route::delete('/foods/{food}/delete', 'FoodsController@destroy');
+
+    //search
+    Route::get('/search', 'SearchController@index');
+    Route::get('/search/find', 'SearchController@find');
+
+
+    // Route::resource('foods', 'FoodsController');
+
 
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');

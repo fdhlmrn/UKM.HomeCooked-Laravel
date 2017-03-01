@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SellsTable extends Migration
+class PivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class SellsTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('pivots', function (Blueprint $table) {
             $table->integer('user_id')->index()->unsigned();
             $table->integer('food_id')->index()->unsigned();
             $table->timestamps();
 
             //foreign key
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
         });
@@ -32,6 +32,6 @@ class SellsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('pivots');
     }
 }

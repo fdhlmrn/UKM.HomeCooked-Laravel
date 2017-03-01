@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Mums Cook') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -36,7 +36,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Mums Cook') }}
                     </a>
                 </div>
 
@@ -44,7 +44,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{url('sales')}}">Jualan</a></li>
+                        <li><a href="{{url('foods')}}">Jualan</a></li>
+                        <li><a href="{{url('search')}}">Cari Makanan</a></li>
 
                     </ul>
 
@@ -113,5 +114,16 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+      $(document).on("click", "#confirm-modal", function(e) {
+      window.console&&console.log('foo');
+      var url = $(this).attr("href");
+      window.console&&console.log(url);
+      e.preventDefault();
+
+      $('#destroy-form').attr('action', url);
+      $('#destroy-modal').modal({ show: true });
+      });
+    </script>
 </body>
 </html>

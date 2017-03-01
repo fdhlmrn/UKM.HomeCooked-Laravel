@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Food;
 
 class User extends Authenticatable
 {
@@ -25,7 +26,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function jualan(){
-      return $this->hasMany(Jualan::class);
+    public function food(){
+        return $this->hasMany(Food::class);
+    }
+
+    public function pivots(){
+
+      return $this->belongsToMany(Food::class, 'pivots');
+
     }
 }

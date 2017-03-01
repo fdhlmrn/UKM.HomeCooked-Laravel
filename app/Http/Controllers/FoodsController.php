@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Sale;
+use App\Food;
+use Illuminate\Support\Facades\Auth;
 
-class SalesController extends Controller
+
+class FoodsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,8 @@ class SalesController extends Controller
     public function index()
     {
         //
-
+        $foods = Food::with('user')->paginate(5);
+        return view('jualan.index', compact('foods'));
     }
 
     /**
@@ -26,6 +29,8 @@ class SalesController extends Controller
     public function create()
     {
         //
+        return view('jualan.create');
+
     }
 
     /**
@@ -37,6 +42,17 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $food = new Food;
+        $food->nama_makanan = $request->nama_makanan;
+        $food->saiz_hidangan = $request->saiz_hidangan;
+        $food->harga = $request->harga;
+        $food->user_id = Auth::user()->id;
+        $food->save();
+
+        return redirect()->action('FoodsController@store')->withMessage('Food has been added');
+
     }
 
     /**
@@ -59,6 +75,8 @@ class SalesController extends Controller
     public function edit($id)
     {
         //
+        $food = Food::findOrFail($id);
+        return view('jualan.edit', compact('food'));
     }
 
     /**
@@ -71,6 +89,19 @@ class SalesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+          'nama_makanan' => 'required',
+          'saiz_hidangan' => 'required',
+          'harga' => 'required',
+        ]);
+
+        $food = Food::findOrFail($id);
+        $food->nama_makanan = $request->nama_makanan;
+        $food->saiz_hidangan = $request->saiz_hidangan;
+        $food->harga = $request->harga;
+        $food->save();
+
+        return redirect()->action('FoodsController@index')->withMessage('Your food has been updated');
     }
 
     /**
@@ -82,5 +113,9 @@ class SalesController extends Controller
     public function destroy($id)
     {
         //
+        $food = Food::findOrFail($id);
+        $food->delete();
+        return back()->withError('Post has been deleted');
+
     }
 }
