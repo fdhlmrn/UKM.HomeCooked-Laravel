@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Order;
 
 use Illuminate\Http\Request;
-use App\Food;
 
-class SearchController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,9 @@ class SearchController extends Controller
     public function index()
     {
         //
-        return view('search.index');
-    }
 
-    public function find($request)
-    {
-        $food = Food::where('nama_makanan', $request)->orWhere('nama_makanan', 'harga', '%' . $request . '%')->get();
-
-        return redirect()->action('SearchController@result');
+        $orders = Order::with('user')->paginate(5);
+        return view('order.index', compact('orders'));
     }
 
     /**
@@ -33,6 +28,7 @@ class SearchController extends Controller
     public function create()
     {
         //
+        return view('order.create');
     }
 
     /**
@@ -44,6 +40,14 @@ class SearchController extends Controller
     public function store(Request $request)
     {
         //
+        $order = new Order;
+        $order->nama_makanan = $request->nama_makanan;
+        $order->saiz_hidangan = $request->saiz_hidangan;
+        $order->harga = $request->harga;
+        $order->user_id = Auth::user()->id;
+        $order->save();
+
+        return redirect()->action('OrdersController')->withMessage('Order has been added');
     }
 
     /**
@@ -66,6 +70,8 @@ class SearchController extends Controller
     public function edit($id)
     {
         //
+        $order = Order::findOrFail($id);
+        return view('order.edit', compact('order'));
     }
 
     /**
@@ -78,6 +84,19 @@ class SearchController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+          'nama_makanan' => 'required',
+          'saiz_hidangan' => 'required',
+          'harga' => 'required',
+        ]);
+
+        $order = Order::findOrFail($id);
+        $order->nama_makanan = $request->nama_makanan;
+        $order->saiz_hidangan = $request->saiz_hidangan;
+        $order->harga = $request->harga;
+        $order->save();
+
+        return redirect()->action('OrdersController@index')->withMessage('Your food has been updated');
     }
 
     /**
@@ -89,5 +108,8 @@ class SearchController extends Controller
     public function destroy($id)
     {
         //
+        $order = Order::findOrFail($id);
+        $order->delete();
+        return back()->withError('Order has been deleted');
     }
 }

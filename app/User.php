@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Food;
+use App\Order;
 
 class User extends Authenticatable
 {
@@ -28,6 +29,10 @@ class User extends Authenticatable
 
     public function food(){
         return $this->hasMany(Food::class);
+    }
+
+    public function order(){
+      return $this->hasMany(Order::class);
     }
 
     public function pivots(){

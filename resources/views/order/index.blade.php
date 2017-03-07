@@ -3,8 +3,8 @@
 @section('content')
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Jualan<a href="{{ url('/foods/create') }}" class="btn btn-info pull-right"
-        role="button">Jualan Baru</a></h2>
+      <h2>Pesanan Makanan<a href="{{ url('/orders/create') }}" class="btn btn-info pull-right"
+        role="button">Pesanan Baru</a></h2>
 
       </div>
       <div class="panel-body">
@@ -17,23 +17,21 @@
                     <th>#</th>
                     <th width="55%">Makanan</th>
                     <th width="15%">Quantity</th>
-                    <th width="15%">Harga(RM)</th>
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
                 <tbody pull-{right}>
                   <?php $i = 0 ?>
-                  @forelse($foods as $food)
+                  @forelse($orders as $order)
                     <tr>
-                      <td>{{ $loop->index }}</td>
-                      <td>{{ $food->nama_makanan }}</td>
-                      <td>{{ $food->saiz_hidangan }}</td>
-                      <td>{{ $food->harga }}</td>
+                      <td>{{ $orders->firstItem() + $i }}</td>
+                      <td>{{$order->nama_makanan}}</td>
+                      <td>{{ $order->saiz_hidangan }}</td>
                       <td>
-                        @if( $food->user_id == Auth::user()->id)
-                          <a href="{{ action('FoodsController@edit', $food->id) }}"
+                        @if( $order->user_id == Auth::user()->id)
+                          <a href="{{ action('OrdersController@edit', $food->id) }}"
                             class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ action('FoodsController@destroy', $food->id) }}"
+                            <a href="{{ action('OrdersController@destroy', $food->id) }}"
                               class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
                             @endif
                           </td>

@@ -31,6 +31,9 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::get('/search', 'SearchController@index');
     Route::get('/search/find', 'SearchController@find');
 
+    //order
+    Route::get('/orders', 'OrdersController@index');
+
 
     // Route::resource('foods', 'FoodsController');
 

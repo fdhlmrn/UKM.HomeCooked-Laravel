@@ -17,7 +17,9 @@ class FoodsController extends Controller
     public function index()
     {
         //
-        $foods = Food::with('user')->paginate(5);
+        // $foods = Food::with('user')->paginate(5);
+        $foods = Food::where('user_id', Auth::user()->id)->get();
+        // dd($foods);
         return view('jualan.index', compact('foods'));
     }
 

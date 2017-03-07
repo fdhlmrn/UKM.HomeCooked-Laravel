@@ -46,6 +46,7 @@
                         &nbsp;
                         <li><a href="{{url('foods')}}">Jualan</a></li>
                         <li><a href="{{url('search')}}">Cari Makanan</a></li>
+                        <li><a href="{{url('orders')}}">Pesan Makanan</a></li>
 
                     </ul>
 
