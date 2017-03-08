@@ -17,6 +17,7 @@
                     <th>#</th>
                     <th width="55%">Makanan</th>
                     <th width="15%">Quantity</th>
+                    <th width="15%">By</th>
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
@@ -27,11 +28,12 @@
                       <td>{{ $orders->firstItem() + $i }}</td>
                       <td>{{$order->nama_makanan}}</td>
                       <td>{{ $order->saiz_hidangan }}</td>
+                      <td>{{ $order->user->name }}</td>
                       <td>
                         @if( $order->user_id == Auth::user()->id)
-                          <a href="{{ action('OrdersController@edit', $food->id) }}"
+                          <a href="{{ action('OrdersController@edit', $order->id) }}"
                             class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ action('OrdersController@destroy', $food->id) }}"
+                            <a href="{{ action('OrdersController@destroy', $order->id) }}"
                               class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
                             @endif
                           </td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Order;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -47,7 +48,7 @@ class OrdersController extends Controller
         $order->user_id = Auth::user()->id;
         $order->save();
 
-        return redirect()->action('OrdersController')->withMessage('Order has been added');
+        return redirect()->action('OrdersController@index')->withMessage('Order has been added');
     }
 
     /**

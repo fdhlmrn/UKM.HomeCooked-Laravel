@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Food;
+use App\State;
+use App\District;
 
 class SearchController extends Controller
 {
@@ -15,7 +17,10 @@ class SearchController extends Controller
     public function index()
     {
         //
-        return view('search.index');
+        $states = State::all();
+        $districts = District::all();
+
+        return view('search.index')->with('states', $states)->with('districts', $districts);
     }
 
     public function find($request)
@@ -33,6 +38,8 @@ class SearchController extends Controller
     public function create()
     {
         //
+
+
     }
 
     /**

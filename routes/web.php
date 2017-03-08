@@ -27,12 +27,19 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::patch('/foods/{food}', 'FoodsController@update');
     Route::delete('/foods/{food}/delete', 'FoodsController@destroy');
 
+
     //search
     Route::get('/search', 'SearchController@index');
     Route::get('/search/find', 'SearchController@find');
 
     //order
     Route::get('/orders', 'OrdersController@index');
+    Route::get('/orders/create', 'OrdersController@create');
+    Route::post('/orders', 'OrdersController@store');
+    Route::get('/orders/{order}', 'OrdersController@show');
+    Route::get('/orders/{order}/edit', 'OrdersController@edit');
+    Route::patch('/orders/{order}', 'OrdersController@update');
+    Route::delete('/orders/{order}/delete', 'OrdersController@destroy');
 
 
     // Route::resource('foods', 'FoodsController');

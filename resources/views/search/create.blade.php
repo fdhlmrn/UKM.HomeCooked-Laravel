@@ -3,7 +3,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Cari Makanan</h2>
+      <h2>Pesan Makanan</h2>
           </div>
     <div class="panel-body">
       <div class="row">
@@ -29,34 +29,28 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Negeri</label>
+              <label class="col-md-4 control-label">Harga Makanan</label>
               <div class="col-md-8">
                 <div class="form-group">
-                  <select>
+                  <input class="form-control" type="text" name="harga" placeholder="Harga Hidangan">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label">Harga Makanan</label>
+              <div class="col-md-8">
+                <div class="form-group">
                   @foreach($states as $state )
-                  <option class="col-md-4 control-label" value="{{ $state->id }}">{{ $state->name }}</option>
-                  @endforeach
-                  </select>
+                  <option value="{{ $state->id }}">{{ $state->name }}</option>
+                @endforeach
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label"></label>
-              <div class="col-md-8">
-                <div class="form-group">
-                  <select>
-                  @foreach($districts as $district )
-                  <option class="col-md-4 control-label" value="{{ $district->id }}">{{ $district->name }}</option>
-                  @endforeach
-                  </select>
+                <div class="col-sm-offset-10 col-sm-10">
+                  <a href="{{ action('SearchController@index') }}" class="btn btn-default">Cancel</a>
+                  <button type="submit" class="btn btn-success">Save</button>
                 </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-sm-offset-11">
-
-              <button type="submit" class="btn btn-success">Search</button>
-
               </div>
             </form>
           </div>
