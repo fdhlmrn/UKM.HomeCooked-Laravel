@@ -14,18 +14,5 @@ class State extends Model
         'name', 'name_long', 'code2', 'code3', 'capital',
     ];
 
-    public function districts()
-    {
-        return $this->hasMany(District::class);
-    }
 
-    public function parliaments()
-    {
-        return $this->hasMany(Parliament::class);
-    }
-
-    public function duns()
-    {
-        return $this->hasMany(Dun::class);
-    }
 }

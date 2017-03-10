@@ -14,13 +14,4 @@ class District extends Model
         'state_id', 'name', 'code3',
     ];
 
-    public function state()
-    {
-        return $this->belongsTo(State::class);
-    }
-
-    public function subdistricts()
-    {
-        return $this->hasMany(SubDistrict::class);
-    }
 }

@@ -32,9 +32,9 @@
               <label class="col-md-4 control-label">Negeri</label>
               <div class="col-md-8">
                 <div class="form-group">
-                  <select>
+                  <select class="form-control input-sm" name="state" id="state">
                   @foreach($states as $state )
-                  <option class="col-md-4 control-label" value="{{ $state->id }}">{{ $state->name }}</option>
+                  <option value="{{ $state->id }}">{{ $state->name }}</option>
                   @endforeach
                   </select>
                 </div>
@@ -44,10 +44,8 @@
               <label class="col-md-4 control-label"></label>
               <div class="col-md-8">
                 <div class="form-group">
-                  <select>
-                  @foreach($districts as $district )
-                  <option class="col-md-4 control-label" value="{{ $district->id }}">{{ $district->name }}</option>
-                  @endforeach
+                  <select class="form-control input-sm" name="district" id="district">
+                  <option value=""></option>
                   </select>
                 </div>
               </div>
@@ -63,4 +61,6 @@
         </div>
       </div>
     </div>
+
+
   @endsection

@@ -125,6 +125,29 @@
       $('#destroy-form').attr('action', url);
       $('#destroy-modal').modal({ show: true });
       });
+
+    </script>
+
+    <script>
+      $('#state').on('change', function(e){
+        console.log(e);
+
+        var state_id = e.target.value;
+
+        //ajax
+        $.get('/ajax-district?state_id=' + state_id, function(data){
+            //success data
+            $('#district').empty();
+            $.each(data, function(index, districtObj){
+
+              $('#district').append('<option value="' + districtObj.id+ '"> '+ districtObj.name + '</option>');
+
+            });
+
+        });
+
+      });
+
     </script>
 </body>
 </html>

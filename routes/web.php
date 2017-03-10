@@ -46,5 +46,6 @@ Route::group(['middleware'=> ['auth']], function() {
 
 
 });
+Route::get('/ajax-district', 'SearchController@ajax');
 
 Auth::routes();

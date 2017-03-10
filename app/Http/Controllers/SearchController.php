@@ -18,9 +18,16 @@ class SearchController extends Controller
     {
         //
         $states = State::all();
-        $districts = District::all()->where('state_id', '$states');
 
-        return view('search.index')->with('states', $states)->with('districts', $districts);
+        return view('search.index')->with('states', $states);
+    }
+
+    public function ajax()
+    {
+      $state_id = Input::get('state_id');
+      $district = District::where('state_id', '=', $state_id)->get();
+
+      return Response::json($district);
     }
 
     public function find($request)
