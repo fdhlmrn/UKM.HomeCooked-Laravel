@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Food;
 use App\State;
@@ -27,7 +28,7 @@ class SearchController extends Controller
       $state_id = Input::get('state_id');
       $district = District::where('state_id', '=', $state_id)->get();
 
-      return Response::json($district);
+      return \Response::json($district);
     }
 
     public function find($request)

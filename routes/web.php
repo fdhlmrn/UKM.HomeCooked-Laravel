@@ -41,11 +41,12 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::patch('/orders/{order}', 'OrdersController@update');
     Route::delete('/orders/{order}/delete', 'OrdersController@destroy');
 
+    Route::get('/ajax-district', 'SearchController@ajax');
+
 
     // Route::resource('foods', 'FoodsController');
 
 
 });
-Route::get('/ajax-district', 'SearchController@ajax');
 
 Auth::routes();

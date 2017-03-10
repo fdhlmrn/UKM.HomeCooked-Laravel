@@ -19,6 +19,37 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous">
+
+    </script>
+
+    <script >
+          $( document ).ready(function() {
+          $( "#states" ).change(function(e){
+            console.log(e);
+            // alert( "Handler for .change() called." );
+              var state_id = e.target.value;
+      //ajax
+        $.get('/ajax-district?state_id=' + state_id, function(data){
+            //success data
+            $('#district').empty();
+            $.each(data, function(index, districtObj){
+
+              $('#district').append('<option value="' + districtObj.id+ '"> '+ districtObj.name + '</option>');
+
+            });
+
+        });
+        });
+
+      });
+    </script>
+
+
+
 </head>
 <body>
     <div id="app">
@@ -128,26 +159,6 @@
 
     </script>
 
-    <script>
-      $('#state').on('change', function(e){
-        console.log(e);
 
-        var state_id = e.target.value;
-
-        //ajax
-        $.get('/ajax-district?state_id=' + state_id, function(data){
-            //success data
-            $('#district').empty();
-            $.each(data, function(index, districtObj){
-
-              $('#district').append('<option value="' + districtObj.id+ '"> '+ districtObj.name + '</option>');
-
-            });
-
-        });
-
-      });
-
-    </script>
 </body>
 </html>
