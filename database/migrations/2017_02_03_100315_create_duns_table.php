@@ -20,6 +20,12 @@ class CreateDunsTable extends Migration
             $table->string('name');
             $table->string('code'); // chair id
             $table->timestamps();
+
+            //foreign
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('parliament_id')->references('id')->on('parliaments')->onDelete('cascade');
+
+
         });
     }
 

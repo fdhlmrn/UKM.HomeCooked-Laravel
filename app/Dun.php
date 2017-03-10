@@ -8,11 +8,11 @@ class Dun extends Model
 {
     public function state()
     {
-        return $this->belongsTo('CleaniqueCoders\Colonies\Models\State');
+        return $this->belongsTo(State::class);
     }
 
     public function parliament()
     {
-        return $this->belongsTo('CleaniqueCoders\Colonies\Models\Parliamnet');
+        return $this->belongsTo(Parliament::class);
     }
 }

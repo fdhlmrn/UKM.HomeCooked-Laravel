@@ -8,11 +8,11 @@ class Parliament extends Model
 {
     public function duns()
     {
-        return $this->hasMany('CleaniqueCoders\Colonies\Models\Dun');
+        return $this->hasMany(Dun::class);
     }
 
     public function state()
     {
-        return $this->belongsTo('CleaniqueCoders\Colonies\Models\State');
+        return $this->belongsTo(State::class);
     }
 }

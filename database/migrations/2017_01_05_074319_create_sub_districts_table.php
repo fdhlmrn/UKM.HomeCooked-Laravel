@@ -18,6 +18,9 @@ class CreateSubDistrictsTable extends Migration
             $table->integer('district_id')->unsigned();
             $table->string('name');
             $table->timestamps();
+
+            //foreign key
+            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
         });
     }
 

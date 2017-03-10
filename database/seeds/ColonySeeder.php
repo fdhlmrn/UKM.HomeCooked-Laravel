@@ -1,10 +1,10 @@
 <?php
 
-use CleaniqueCoders\Colonies\Models\District;
-use CleaniqueCoders\Colonies\Models\Dun;
-use CleaniqueCoders\Colonies\Models\Parliament;
-use CleaniqueCoders\Colonies\Models\State;
-use CleaniqueCoders\Colonies\Models\SubDistrict;
+use App\District;
+use App\Dun;
+use App\Parliament;
+use App\State;
+use App\SubDistrict;
 use Illuminate\Database\Seeder;
 
 class ColonySeeder extends Seeder
@@ -16,6 +16,8 @@ class ColonySeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         State::truncate();
         District::truncate();
         SubDistrict::truncate();
@@ -77,5 +79,8 @@ class ColonySeeder extends Seeder
                 }
             }
         }
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
     }
 }

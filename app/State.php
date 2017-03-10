@@ -16,16 +16,16 @@ class State extends Model
 
     public function districts()
     {
-        return $this->hasMany('CleaniqueCoders\Colonies\Models\District');
+        return $this->hasMany(District::class);
     }
 
     public function parliaments()
     {
-        return $this->hasMany('App\Parliament');
+        return $this->hasMany(Parliament::class);
     }
 
     public function duns()
     {
-        return $this->hasMany('App\Dun');
+        return $this->hasMany(Dun::class);
     }
 }
