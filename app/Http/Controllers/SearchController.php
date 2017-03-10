@@ -18,7 +18,7 @@ class SearchController extends Controller
     {
         //
         $states = State::all();
-        $districts = District::all();
+        $districts = District::all()->where('state_id', '$states');
 
         return view('search.index')->with('states', $states)->with('districts', $districts);
     }
