@@ -35,6 +35,11 @@
                             class="btn btn-primary btn-sm">Edit</a>
                             <a href="{{ action('OrdersController@destroy', $order->id) }}"
                               class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
+
+                        <?php else: ?>
+                        <a href="{{ action('OrdersController@edit', $order->id) }}"
+                          class="btn btn-primary btn-sm">Accept</a>
+
                             @endif
                           </td>
                         </tr>
