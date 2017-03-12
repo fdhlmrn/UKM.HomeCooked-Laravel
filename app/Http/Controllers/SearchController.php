@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Food;
 use App\State;
 use App\District;
+use App\SubDistrict;
 
 class SearchController extends Controller
 {
@@ -31,11 +32,19 @@ class SearchController extends Controller
       return \Response::json($district);
     }
 
+    public function ajax2()
+    {
+      $district_id = Input::get('district_id');
+      $subdistrict = SubDistrict::where('district_id', '=', $district_id)->get();
+
+      return \Response::json($subdistrict);
+    }
+
     public function find($request)
     {
-        $food = Food::where('nama_makanan', $request)->orWhere('nama_makanan', 'harga', '%' . $request . '%')->get();
+        $foods = Food::where('nama_makanan', $request)->get();
 
-        return redirect()->action('SearchController@result');
+        return view('search.result', compact('foods'));
     }
 
     /**

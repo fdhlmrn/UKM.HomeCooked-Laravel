@@ -30,7 +30,7 @@ Route::group(['middleware'=> ['auth']], function() {
 
     //search
     Route::get('/search', 'SearchController@index');
-    Route::get('/search/find', 'SearchController@find');
+    Route::post('/search/find', 'SearchController@find');
 
     //order
     Route::get('/orders', 'OrdersController@index');
@@ -42,6 +42,7 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::delete('/orders/{order}/delete', 'OrdersController@destroy');
 
     Route::get('/ajax-district', 'SearchController@ajax');
+    Route::get('/ajax-subdistrict', 'SearchController@ajax2');
 
 
     // Route::resource('foods', 'FoodsController');

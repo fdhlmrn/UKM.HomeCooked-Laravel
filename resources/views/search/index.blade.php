@@ -51,6 +51,16 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <select class="form-control input-sm" name="subdistrict" id="subdistrict">
+                  <option value=""></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
               <div class="col-sm-offset-11">
 
               <button type="submit" class="btn btn-success">Search</button>

@@ -47,6 +47,27 @@
 
       });
     </script>
+        <script >
+          $( document ).ready(function() {
+          $( "#district" ).change(function(e){
+            console.log(e);
+            // alert( "Handler for .change() called." );
+              var district_id = e.target.value;
+      //ajax
+        $.get('/ajax-subdistrict?district_id=' + district_id, function(data){
+            //success data
+            $('#subdistrict').empty();
+            $.each(data, function(index, subdistrictObj){
+
+              $('#subdistrict').append('<option value="' + subdistrictObj.id+ '"> '+ subdistrictObj.name + '</option>');
+
+            });
+
+        });
+        });
+
+      });
+    </script>
 
 
 

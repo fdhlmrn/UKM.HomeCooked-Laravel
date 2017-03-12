@@ -10,8 +10,6 @@
         <div class="col-md-10">
           <form class="form-horizontal" action="{{ action('OrdersController@store') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
-
-
             <div class="form-group">
               <label class="col-md-4 control-label">Perincian Makanan</label>
               <div class="col-md-8">
