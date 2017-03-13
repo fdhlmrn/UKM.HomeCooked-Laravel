@@ -41,6 +41,12 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::patch('/orders/{order}', 'OrdersController@update');
     Route::delete('/orders/{order}/delete', 'OrdersController@destroy');
 
+    //profiles
+    Route::get('/profiles', 'ProfilesController@index');
+    Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
+    Route::patch('/profiles/{profile}', 'ProfilesController@update');
+
+    //ajax
     Route::get('/ajax-district', 'SearchController@ajax');
     Route::get('/ajax-subdistrict', 'SearchController@ajax2');
 

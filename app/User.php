@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Food;
 use App\Order;
+use App\Profile;
 
 class User extends Authenticatable
 {
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'address', 'district', 'subdistrict' ,'phone'
     ];
 
     /**
@@ -39,5 +40,9 @@ class User extends Authenticatable
 
       return $this->belongsToMany(Food::class, 'pivots');
 
+    }
+
+    public function profile(){
+        return $this->hasOne(Profile::class);
     }
 }
