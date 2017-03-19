@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+//google map
+Route::get('/map', function() {
+    return view('location.index');
+});
+
 Route::group(['middleware'=> ['auth']], function() {
     Route::get('/home', 'HomeController@index');
 
@@ -49,6 +55,7 @@ Route::group(['middleware'=> ['auth']], function() {
     //ajax
     Route::get('/ajax-district', 'SearchController@ajax');
     Route::get('/ajax-subdistrict', 'SearchController@ajax2');
+
 
 
     // Route::resource('foods', 'FoodsController');

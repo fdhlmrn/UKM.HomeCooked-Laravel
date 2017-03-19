@@ -65,8 +65,8 @@ class ProfilesController extends Controller
     public function edit($id)
     {
         //
-        $profiles = Profile::findorFail($id);
-        return view('editprofile', compact('profiles'));
+        $profile = Profile::findorFail($id);
+        return view('editprofile', compact('profile'));
     }
 
     /**
@@ -79,6 +79,21 @@ class ProfilesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // dd(User::first());
+        $user = User::findOrFail($id);
+        $profile = Profile::where('user_id', $id)->first();
+          $user->name = $request->name;
+          $user->email = $request->email;
+          $profile->no_phone = $request->no_phone;
+          $profile->address = $request->address;
+          // $profile->state = $request->state;
+          // $profile->no_tel = $request->no_tel;
+          // $profile->subdistrict = $request->subdistrict;
+          $user->save();
+          $profile->save();
+
+        return redirect()->action('ProfilesController@index')->withMessage('Post has been successfully updated');
+
     }
 
     /**

@@ -9,7 +9,9 @@
     <div class="row">
       <div class="col-md-10">
         <div class="row">
-        <form class="form-horizontal" action="{{ action('ProfilesController@update', $profiles->user->id) }}" method="post" enctype="multipart/form-data">
+        
+
+      <form class="form-horizontal" action="{{ action('ProfilesController@update', $profile->id) }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('PATCH')}}
           <div class="col-sm-6 col-md-4">
@@ -17,26 +19,30 @@
             <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
           </div>
             <div class="col-sm-6 col-md-8">
-              <h2>{{$profile->user->name}}</h2>    
+              <h2><input class="form-control" type="text" value="{{$profile->user->name}}" name="name"></h2>    
               <br> 
-              <h4><i class="glyphicon glyphicon-envelope"></i>    {{$profile->user->email}}</h4>
+              <h4><input class="form-control" type="text" value="{{$profile->user->email}}" name="email"></h4>
               <br>
-              <h4><i class="glyphicon glyphicon-earphone"></i>{{$profile->user->phone}}</h4>
+              <h4><input class="form-control" type="text" value="{{$profile->no_phone}}" name="no_phone"></h4>
               <br>
-              <h4><i class=" glyphicon glyphicon-home"></i>{{$profile->user->address}}
-              </h4>{{$profile->user->state}}</h4>
-              </h4>{{$profile->user->subdistrict}}</h4>
-            </div>
+{{--               <h4><input class="form-control" type="text" value="{{$profile->address}}" name="address"></h4><br>
+              </h4><input class="form-control" type="text" value="{{$profile->state}}" name="state"></h4><br>
+              </h4><input class="form-control" type="text" value="{{$profile->subdistrict}}" name="subdistrict"></h4> --}}
+
+              </div>
             <div class="form-group">
                 <div class="col-sm-offset-10 col-sm-10">
                   <a href="{{ action('ProfilesController@index') }}" class="btn btn-default">Edit</a>
                   <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </div>
-            </form>
-          </div>
+          </form>
+
+
+
         </div>
       </div>
     </div>
   </div>
-  @endsection
+</div>
+@endsection

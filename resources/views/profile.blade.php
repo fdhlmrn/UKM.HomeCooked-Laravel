@@ -18,11 +18,11 @@
               <br> 
               <h4><i class="glyphicon glyphicon-envelope"></i>    {{$profile->user->email}}</h4>
               <br>
-              <h4><i class="glyphicon glyphicon-earphone"></i>{{$profile->user->phone}}</h4>
+              <h4><i class="glyphicon glyphicon-earphone"></i>{{$profile->no_phone}}</h4>
               <br>
-              <h4><i class=" glyphicon glyphicon-home"></i>{{$profile->user->address}}
+             {{--  <h4><i class=" glyphicon glyphicon-home"></i>{{$profile->user->address}}
               </h4>{{$profile->user->state}}</h4>
-              </h4>{{$profile->user->subdistrict}}</h4>
+              </h4>{{$profile->user->subdistrict}}</h4> --}}
           @endforeach
 
             </div>
