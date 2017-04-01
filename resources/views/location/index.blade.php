@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geolocation</title>
+    <title>Geocoding service</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -16,55 +16,57 @@
         margin: 0;
         padding: 0;
       }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
     </style>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js" ></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyDuYeuRRArPgWsCE_Zrmzd6WcrMI08dNEU&callback=initMap" type="text/javascript" ></script>
+  </head>
+  <body>
+    <div id="floating-panel">
+      <input id="address" type="textbox" value="Sydney, NSW">
+      <input id="submit" type="button" value="Geocode">
+    </div>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
 
-<div class="container">
-  <div class="col-sm-4">
-    <h1>Add Vendor, Location</h1>
-    <form class="form-horizontal" action="{{ url('/map') }}">
+        document.getElementById('submit').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
 
-
-        <div class="form-group">
-          <label for="">Map</label>
-          <input type="text" id="searchmap">
-          <div id="map-canvas"></div>
-        </div> 
-        <div class="form-group">
-          <label for="">Lat</label>
-          <input type="text" class="form-control input-sm" name="lat" id="lat">
-        </div>
-        <div class="form-group">
-          <label for="">Lng</label>
-          <input type="text" class="form-control input-sm" name="lng" id="lng">
-        </div> 
-
-        <button class="btn btn-sm btn-danger"></button>
-      </form>
-
-  </div>  
-</div>
-
-<script>
-  
-      var map = new google.maps.Marker(document.getElementById('map-canvas'),{
-          center:{
-            lat: 27.72,
-            lng: 85.36
-          },
-          zoom:15
-      });
-
-      var marker = new google.maps.Marker({
-        position: {
-          lat: 27.72,
-          lng: 85.36
-        },
-        map: map
-      });
-
-</script>
-
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxLkQWFwxACxiFuafIujbfzo3uAYeIujA&callback=initMap">
+    </script>
+  </body>
 </html>
