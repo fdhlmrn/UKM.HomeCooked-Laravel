@@ -36,7 +36,7 @@ Route::group(['middleware'=> ['auth']], function() {
 
     //search
     Route::get('/search', 'SearchController@index');
-    Route::post('/search/find', 'SearchController@find');
+    Route::get('/search/find', 'SearchController@find');
 
     //order
     Route::get('/orders', 'OrdersController@index');

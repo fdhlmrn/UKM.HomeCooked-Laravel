@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Food;
 use Illuminate\Support\Facades\Auth;
+use App\State;
 
 
 class FoodsController extends Controller
@@ -17,7 +18,6 @@ class FoodsController extends Controller
     public function index()
     {
         //
-        // $foods = Food::with('user')->paginate(5);
         $foods = Food::where('user_id', Auth::user()->id)->get();
         // dd($foods);
         return view('jualan.index', compact('foods'));
@@ -31,8 +31,18 @@ class FoodsController extends Controller
     public function create()
     {
         //
-        return view('jualan.create');
+        $states = State::all();
 
+        return view('jualan.create', compact('states'));
+
+    }
+
+    public function ajax()
+    {
+      $state_id = Input::get('state_id');
+      $district = District::where('state_id', '=', $state_id)->get();
+
+      return \Response::json($district);
     }
 
     /**
@@ -48,6 +58,8 @@ class FoodsController extends Controller
         $food->nama_makanan = $request->nama_makanan;
         $food->saiz_hidangan = $request->saiz_hidangan;
         $food->harga = $request->harga;
+        $food->state_id = $request->state;
+        $food->district_id = $request->district;
         $food->user_id = Auth::user()->id;
         $food->save();
 

@@ -32,19 +32,27 @@ class SearchController extends Controller
       return \Response::json($district);
     }
 
-    public function ajax2()
+    public function find()
     {
-      $district_id = Input::get('district_id');
-      $subdistrict = SubDistrict::where('district_id', '=', $district_id)->get();
+        $keyword=Input::get('keyword');
+        $state=Input::get('state');
+        $district=Input::get('district');
 
-      return \Response::json($subdistrict);
+        if($district == 'null') {
+        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->where('state_id', $state)->orderBy('id')->paginate(3);
+        }
+
+        else {
+        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->where('state_id', $state)->where('district_id', $district)->orderBy('id')->paginate(3);
+        }
+
+        // dd($foods);
+        return view('search.result', compact('foods'));
     }
 
-    public function find($request)
+    public function details()
     {
-        $foods = Food::where('nama_makanan', $request)->get();
-
-        return view('search.result', compact('foods'));
+        
     }
 
     /**

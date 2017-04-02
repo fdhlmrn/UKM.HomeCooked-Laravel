@@ -14,5 +14,8 @@ class State extends Model
         'name', 'name_long', 'code2', 'code3', 'capital',
     ];
 
+    public function food(){
+        return $this->belongsToMany(Food::class);
+    }
 
 }

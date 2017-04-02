@@ -45,7 +45,8 @@
       //ajax
         $.get('/ajax-district?state_id=' + state_id, function(data){
             //success data
-            $('#district').empty();
+            // $('#district').empty();
+            $('#district').find("option:not(:first)").remove();
             $.each(data, function(index, districtObj){
 
               $('#district').append('<option value="' + districtObj.id+ '"> '+ districtObj.name + '</option>');
@@ -57,29 +58,6 @@
 
       });
     </script>
-        <script >
-          $( document ).ready(function() {
-          $( "#district" ).change(function(e){
-            console.log(e);
-            // alert( "Handler for .change() called." );
-              var district_id = e.target.value;
-      //ajax
-        $.get('/ajax-subdistrict?district_id=' + district_id, function(data){
-            //success data
-            $('#subdistrict').empty();
-            $.each(data, function(index, subdistrictObj){
-
-              $('#subdistrict').append('<option value="' + subdistrictObj.id+ '"> '+ subdistrictObj.name + '</option>');
-
-            });
-
-        });
-        });
-
-      });
-    </script>
-
-
 
 </head>
 <body>

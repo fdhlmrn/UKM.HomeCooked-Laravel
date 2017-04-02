@@ -14,4 +14,8 @@ class District extends Model
         'state_id', 'name', 'code3',
     ];
 
+    public function food(){
+        return $this->belongsToMany(Food::class);
+    }
+
 }

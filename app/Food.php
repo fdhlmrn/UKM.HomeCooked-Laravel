@@ -8,7 +8,7 @@ class Food extends Model
 {
     //
     protected $fillable = [
-      'nama_makanan', 'saiz_hidangan', 'harga'
+      'nama_makanan', 'saiz_hidangan', 'harga', 
     ];
 
 
@@ -18,6 +18,15 @@ class Food extends Model
 
     public function pivots(){
       return $this->belongsToMany(User::class, 'pivots');
-
     }
+
+    public function state(){
+      return $this->hasMany(State::class);
+    }
+
+    public function district(){
+      return $this->hasMany(District::class);
+    }
+
+
 }
