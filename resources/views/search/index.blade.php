@@ -1,3 +1,4 @@
+@include('modal.destroy-modal')
 @extends('layouts.app')
 @section('content')
 
@@ -5,7 +6,7 @@
     <div class="panel-heading">
       <h2>Cari Makanan</h2>
           </div>
-    <div class="panel-body">
+    <div class="panel-body"> 
       <div class="row">
         <div class="col-md-10">
           <form class="form-horizontal" action="{{ action('SearchController@find') }}" method="get" enctype="multipart/form-data">
@@ -39,7 +40,7 @@
                   </select>
                 </div>
               </div>
-            </div>
+            </div>        
             <div class="form-group">
               <div class="col-sm-offset-11">
 

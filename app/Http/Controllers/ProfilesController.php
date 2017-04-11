@@ -92,7 +92,7 @@ class ProfilesController extends Controller
           $user->save();
           $profile->save();
 
-        return redirect()->action('ProfilesController@index')->withMessage('Post has been successfully updated');
+        return redirect()->action('ProfilesController@index')->withMessage('Profile has been successfully updated');
 
     }
 
