@@ -21,7 +21,7 @@ class ProfilesController extends Controller
 
         $profiles = Profile::where('user_id', Auth::user()->id)->get();
 // dd($profiles);
-        return view ('profile', compact('profiles'));
+        return view ('profile.profile', compact('profiles'));
     }
 
     /**
@@ -54,6 +54,11 @@ class ProfilesController extends Controller
     public function show($id)
     {
         //
+        $profile = Profile::where('user_id', $id)->first();
+        // dd($profiles);
+        return view ('profile.details', compact('profile'));
+
+
     }
 
     /**
@@ -66,7 +71,7 @@ class ProfilesController extends Controller
     {
         //
         $profile = Profile::findorFail($id);
-        return view('editprofile', compact('profile'));
+        return view('profile.editprofile', compact('profile'));
     }
 
     /**
@@ -86,9 +91,9 @@ class ProfilesController extends Controller
           $user->email = $request->email;
           $profile->no_phone = $request->no_phone;
           $profile->address = $request->address;
-          // $profile->state = $request->state;
-          // $profile->no_tel = $request->no_tel;
-          // $profile->subdistrict = $request->subdistrict;
+          $profile->state = $request->state;
+          $profile->no_phone = $request->no_phone;
+          $profile->district = $request->district;
           $user->save();
           $profile->save();
 

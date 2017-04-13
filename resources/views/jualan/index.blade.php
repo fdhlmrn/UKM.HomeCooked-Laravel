@@ -15,9 +15,10 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th width="55%">Makanan</th>
-                    <th width="15%">Quantity</th>
+                    <th width="35%">Makanan</th>
+                    <th width="15%">Saiz Hidangan</th>
                     <th width="15%">Harga(RM)</th>
+                    <th width="15%">Lokasi</th>
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
@@ -29,6 +30,7 @@
                       <td>{{ $food->nama_makanan }}</td>
                       <td>{{ $food->saiz_hidangan }}</td>
                       <td>{{ $food->harga }}</td>
+                      <td>{{ $food->state->name }}, {{ $food->district->name}}</td>
                       <td>
                         @if( $food->user_id == Auth::user()->id)
                           <a href="{{ action('FoodsController@edit', $food->id) }}"

@@ -15,7 +15,7 @@ class District extends Model
     ];
 
     public function food(){
-        return $this->belongsToMany(Food::class);
+        return $this->hasMany(Food::class);
     }
 
 }

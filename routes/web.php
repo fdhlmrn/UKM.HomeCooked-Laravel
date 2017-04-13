@@ -30,6 +30,7 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::post('/foods', 'FoodsController@store');
     Route::get('/foods/{food}', 'FoodsController@show');
     Route::get('/foods/{food}/edit', 'FoodsController@edit');
+    Route::get('/foods/{food}/buy', 'FoodsController@buy');
     Route::patch('/foods/{food}', 'FoodsController@update');
     Route::delete('/foods/{food}/delete', 'FoodsController@destroy');
 
@@ -51,6 +52,7 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::get('/profiles', 'ProfilesController@index');
     Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
     Route::patch('/profiles/{profile}', 'ProfilesController@update');
+    Route::get('/profiles/{user_id}/details', 'ProfilesController@show');
 
     //ajax
     Route::get('/ajax-district', 'SearchController@ajax');

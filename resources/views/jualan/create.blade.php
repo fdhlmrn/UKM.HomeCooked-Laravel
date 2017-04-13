@@ -40,7 +40,7 @@
               <label class="col-md-4 control-label">Negeri</label>
               <div class="col-md-8">
                 <div class="form-group">
-                  <select class="form-control input-sm" name="state" id="state">
+                  <select class="form-control input-sm" name="state" id="states">
                   @foreach($states as $state )
                   <option value="{{ $state->id }}">{{ $state->name }}</option>
                   @endforeach

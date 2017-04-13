@@ -21,11 +21,11 @@ class Food extends Model
     }
 
     public function state(){
-      return $this->hasMany(State::class);
+      return $this->belongsTo(State::class);
     }
 
     public function district(){
-      return $this->hasMany(District::class);
+      return $this->belongsTo(District::class);
     }
 
 

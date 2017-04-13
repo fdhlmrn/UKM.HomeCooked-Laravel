@@ -42,7 +42,9 @@
               </div>
             </div>        
             <div class="form-group">
-              <div class="col-sm-offset-11">
+              <div class="col-sm-offset-10">
+              
+                <a href="{{ url('/home') }}" class="btn btn-info" role="button">List All</a>
 
               <button type="submit" class="btn btn-success">Search</button>
 

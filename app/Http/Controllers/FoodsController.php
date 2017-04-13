@@ -61,6 +61,7 @@ class FoodsController extends Controller
         $food->state_id = $request->state;
         $food->district_id = $request->district;
         $food->user_id = Auth::user()->id;
+        // dd($food);
         $food->save();
 
         return redirect()->action('FoodsController@store')->withMessage('Food has been added');
@@ -87,8 +88,10 @@ class FoodsController extends Controller
     public function edit($id)
     {
         //
+
+        $states = State::all();
         $food = Food::findOrFail($id);
-        return view('jualan.edit', compact('food'));
+        return view('jualan.edit', compact('food'))->with('states', $states);
     }
 
     /**
