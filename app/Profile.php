@@ -14,4 +14,16 @@ class Profile extends Model
     public function user(){
     	return $this->belongsTo(User::class);
     }
+
+    public function review(){
+    	return $this->hasMany(Review::class);
+    }
+
+    public function likes(){
+        return $this->belongsToMany(User::class, 'likes');
+    }
+
+    public function liked(){
+        return $this->hasMany(Like::class, 'profile_id');
+    }
 }
