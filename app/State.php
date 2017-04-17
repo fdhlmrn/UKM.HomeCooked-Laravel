@@ -18,4 +18,8 @@ class State extends Model
         return $this->hasMany(Food::class);
     }
 
+    public function profile(){
+        return $this->belongsToMany(State::class);
+    }
+
 }

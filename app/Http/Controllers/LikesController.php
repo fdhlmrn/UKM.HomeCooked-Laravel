@@ -14,7 +14,7 @@ class LikesController extends Controller
     {
       $user = Auth::user();
       $stats = $user->likes()->toggle($profile);
-      dd($stats);
+      // dd($stats);
 
       return back();
     }

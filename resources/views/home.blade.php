@@ -14,9 +14,9 @@
                 <thead>
                   <tr>
                     <th width="35%">Makanan</th>
-                    <th width="15%">By</th>
-                    <th width="15%">Saiz Hidangan</th>
-                    <th width="15%">Harga(RM)</th>
+                    <th width="10%">By</th>
+                    <th width="5%">Saiz Hidangan</th>
+                    <th width="5%">Harga(RM)</th>
                     <th width="15%">Lokasi</th>
                     <th width="15%">Action</th>
                   </tr>
@@ -27,7 +27,9 @@
                 @endphp --}}
                   @forelse($foods as $food)
                     <tr>
-                      <td>{{ $food->nama_makanan }}</td>
+                      <td>{{ $food->nama_makanan }} <br><br>  <small class="">
+                          {{ $food->created_at->diffForHumans() }}
+                        </small></td>
                       <td><a href="{{ action('ProfilesController@show', $food->user->id)}}"> {{ $food->user->name }}</td>
                       <td>{{ $food->saiz_hidangan }}</td>
                       <td>{{ $food->harga }}</td>

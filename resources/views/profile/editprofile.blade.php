@@ -56,11 +56,15 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="col-md-4 control-label">District
+            <label class="col-md-4 control-label">State
             </label>
             <div class="col-sm-6 col-md-8">
               <div class="form-group">
-                <input class="form-control" type="text" value="{{$profile->district}}" name="district">
+              <select class="form-control input-sm" name="state" id="states">
+                  @foreach($states as $state )
+                  <option value="{{ $state->id }}">{{ $state->name }}</option>
+                  @endforeach
+                  </select>
                 </div>
             </div>
           </div>
@@ -69,24 +73,16 @@
             </label>
             <div class="col-sm-6 col-md-8">
               <div class="form-group">
-                <input class="form-control" type="text" value="{{$profile->state}}" name="state">
+              <select class="form-control input-sm" name="district" id="district">
+                  <option value="null">Semua Daerah</option>
+                  </select>
                 </div>
             </div>
           </div>
           </div>    
-{{--               <br> 
-              <h4><input class="form-control" type="text" value="{{$profile->user->email}}" name="email"></h4>
-              <br>
-              <h4><input class="form-control" type="text" value="{{$profile->no_phone}}" name="no_phone"></h4>
-              <br>
-              <h4><input class="form-control" type="text" value="{{$profile->address}}" name="address"></h4><br>
-              </h4><input class="form-control" type="text" value="{{$profile->state}}" name="state"></h4><br>
-              </h4><input class="form-control" type="text" value="{{$profile->subdistrict}}" name="subdistrict"></h4>
-
-              </div> --}}
             <div class="form-group">
                 <div class="col-sm-offset-10 col-sm-10">
-                  <a href="{{ action('ProfilesController@index') }}" class="btn btn-default">Edit</a>
+                  <a href="{{ action('ProfilesController@index') }}" class="btn btn-danger">Cancel</a>
                   <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </div>

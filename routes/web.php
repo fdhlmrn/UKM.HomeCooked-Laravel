@@ -53,9 +53,12 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
     Route::patch('/profiles/{profile}', 'ProfilesController@update');
     Route::get('/profiles/{user_id}/details', 'ProfilesController@show');
-    Route::get('/profiles/{user_id}/comments', 'ReviewController@index');
+    Route::get('/profiles/{user_id}/comments', 'ReviewController@index');  
+    Route::get('/profiles/{review}', 'ReviewController@show');
+    Route::get('/profiles/{review}/edit', 'ReviewController@edit');
+    Route::delete('/profiles/{review}/delete', 'ReviewController@destroy');
     Route::post('/profiles', 'ReviewController@store');
-    Route::post('/profiles/{id}/like', 'LikesController@likesAction');
+    Route::post('/profiles/{profile}/like', 'LikesController@likesAction');
 
 
     //ajax

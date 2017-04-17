@@ -67,6 +67,11 @@ class ReviewController extends Controller
     public function show($id)
     {
         //
+        // $reviews = Review::where('profile_id', $id)->get();
+        // $profile = Profile::where('user_id', $id)->first();
+        // // dd($reviews);
+        // return view ('profile.details', compact('profile'))->with('reviews', $reviews);
+
     }
 
     /**
@@ -100,6 +105,9 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //        
+        $review = Review::findOrFail($id);
+        $review->delete();
+        return back()->withError('Comment has been deleted');
     }
 }

@@ -18,4 +18,8 @@ class District extends Model
         return $this->hasMany(Food::class);
     }
 
+    public function profile(){
+        return $this->belongsToMany(Profile::class);
+    }
+
 }

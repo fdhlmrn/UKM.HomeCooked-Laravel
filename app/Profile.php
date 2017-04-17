@@ -26,4 +26,13 @@ class Profile extends Model
     public function liked(){
         return $this->hasMany(Like::class, 'profile_id');
     }
+
+    public function state(){
+        return $this->hasMany(State::class);
+    }
+
+    public function district(){
+        return $this->hasMany(District::class); 
+    }
+
 }

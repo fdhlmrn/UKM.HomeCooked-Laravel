@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\State;
+use App\District;
+use App\Review;
 Use App\Profile;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +21,10 @@ class ProfilesController extends Controller
     public function index()
     {
         //
-
+        $reviews = Review::where('profile_id', Auth::user()->id)->get()->sortByDesc('created_at');
         $profiles = Profile::where('user_id', Auth::user()->id)->get();
 // dd($profiles);
-        return view ('profile.profile', compact('profiles'));
+        return view ('profile.profile', compact('profiles'))->with('reviews', $reviews);
     }
 
     /**
@@ -54,9 +57,10 @@ class ProfilesController extends Controller
     public function show($id)
     {
         //
+        $reviews = Review::where('profile_id', $id)->get()->sortByDesc('created_at');
         $profile = Profile::where('user_id', $id)->first();
         // dd($profiles);
-        return view ('profile.details', compact('profile'));
+        return view ('profile.details', compact('profile'))->with('reviews', $reviews);
 
 
     }
@@ -70,8 +74,9 @@ class ProfilesController extends Controller
     public function edit($id)
     {
         //
+        $states = State::all();
         $profile = Profile::findorFail($id);
-        return view('profile.editprofile', compact('profile'));
+        return view('profile.editprofile', compact('profile'))->with('states', $states);
     }
 
     /**
@@ -85,15 +90,17 @@ class ProfilesController extends Controller
     {
         //
         // dd(User::first());
+        $state = State::where('id', $request->state)->first();
+        $district = District::where('id', $request->district)->first();
         $user = User::findOrFail($id);
         $profile = Profile::where('user_id', $id)->first();
           $user->name = $request->name;
           $user->email = $request->email;
           $profile->no_phone = $request->no_phone;
           $profile->address = $request->address;
-          $profile->state = $request->state;
-          $profile->no_phone = $request->no_phone;
-          $profile->district = $request->district;
+          $profile->state = $state->name;
+          $profile->district = $district->name;
+          // dd($profile);
           $user->save();
           $profile->save();
 
