@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Food;
 use Illuminate\Support\Facades\Auth;
 use App\State;
-
+use Charts;
 
 class FoodsController extends Controller
 {
@@ -15,10 +15,24 @@ class FoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function charts()
+    {
+        $chart = Charts::create('line', 'highcharts')
+            // ->view('custom.line.chart.view') // Use this if you want to use your own template
+            ->title('My nice chart')
+            ->labels(['First', 'Second', 'Third'])
+            ->values([5,10,20])
+            ->dimensions(1000,500)
+            ->responsive(true);
+        return view('chart', ['chart' => $chart]);
+
+    }
+
     public function index()
     {
         //
-        $foods = Food::where('user_id', Auth::user()->id)->get();
+        $foods = Food::where('user_id', Auth::user()->id)->orderBy('created_at', 'asc')->paginate(7);
         // dd($foods);
         return view('jualan.index', compact('foods'));
     }
@@ -114,6 +128,8 @@ class FoodsController extends Controller
         $food->nama_makanan = $request->nama_makanan;
         $food->saiz_hidangan = $request->saiz_hidangan;
         $food->harga = $request->harga;
+        $food->state_id = $request->state;
+        $food->district_id = $request->district;
         $food->save();
 
         return redirect()->action('FoodsController@index')->withMessage('Your food has been updated');

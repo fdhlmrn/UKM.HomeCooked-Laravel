@@ -16,25 +16,38 @@
                   <tr>
                     <th>#</th>
                     <th width="55%">Makanan</th>
-                    <th width="15%">Quantity</th>
-                    <th width="15%">By</th>
+                    <th width="10%">By</th>
+                    <th width="15%">Saiz Hidangan</th>
+                    <th width="15%">Harga(RM)</th>
+                    <th width="15%">Lokasi</th>
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
-                <tbody pull-{right}>
+                <tbody pull-right>
                   <?php $i = 0 ?>
                   @forelse($orders as $order)
                     <tr>
                       <td>{{ $orders->firstItem() + $i }}</td>
-                      <td>{{$order->nama_makanan}}</td>
-                      <td>{{ $order->saiz_hidangan }}</td>
+                      <td>{{$order->nama_makanan}} <br><br><small class="">
+                          {{ $order->created_at->diffForHumans() }}
+                        </small></td>
                       <td>{{ $order->user->name }}</td>
+
+                      <td>{{ $order->saiz_hidangan }}</td>
+                      <td>{{ $order->harga }}</td>
+                      <td>{{ $order->state->name }}, {{ $order->district->name}}</td>
                       <td>
                         @if( $order->user_id == Auth::user()->id)
                           <a href="{{ action('OrdersController@edit', $order->id) }}"
                             class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ action('OrdersController@destroy', $order->id) }}"
-                              class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
+                              <br>
+                            <br>
+    
+                          <form action="{{ action('OrdersController@destroy',$order->id) }}" method="POST">  
+                            {{ csrf_field() }}
+                            {{method_field('DELETE')}}
+                            <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+                          </form>
 
                         <?php else: ?>
                         <a href="{{ action('OrdersController@edit', $order->id) }}"
@@ -51,7 +64,9 @@
                       @endforelse
                     </tbody>
                   </table>
-                  {{-- {{ $sale->links() }} --}}
+                  <div class="pagination-bar text-center">
+                    {{ $orders->render() }}
+                  </div>
                 </div>
               </div>
             </div>

@@ -57,7 +57,7 @@ class ProfilesController extends Controller
     public function show($id)
     {
         //
-        $reviews = Review::where('profile_id', $id)->get()->sortByDesc('created_at');
+        $reviews = Review::where('profile_id', $id)->orderBy('created_at', 'desc')->paginate(4);
         $profile = Profile::where('user_id', $id)->first();
         // dd($profiles);
         return view ('profile.details', compact('profile'))->with('reviews', $reviews);

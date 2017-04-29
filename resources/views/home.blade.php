@@ -1,5 +1,6 @@
-@include('modal.destroy-modal')
 @extends('layouts.app')
+@include('modal.destroy-modal')
+
 @section('content')
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -21,7 +22,7 @@
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
-                <tbody pull-{right}>
+                <tbody pull-right>
 {{--                 @php
                   dd($foods);
                 @endphp --}}
@@ -42,7 +43,7 @@
                             <a href="{{ action('FoodsController@destroy', $food->id) }}"
                              class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
                         @else
-                            <a href="{{ action('FoodsController@buy', $food->id) }}"
+                            <a href="{{ action('FoodsController@show', $food->id) }}"
                             class="btn btn-primary btn-sm">Buy</a>
                         @endif
 
@@ -55,7 +56,9 @@
                       @endforelse
                     </tbody>
                   </table>
-                  {{-- {{ $sale->links() }} --}}
+                  <div class="pagination-bar text-center">
+                    {{ $foods->render() }}
+                  </div>
                 </div>
               </div>
             </div>

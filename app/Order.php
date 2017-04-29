@@ -15,4 +15,12 @@ class Order extends Model
       return $this->belongsTo(User::class);
     }
 
+	public function state(){
+      return $this->belongsTo(State::class);
+    }
+
+    public function district(){
+      return $this->belongsTo(District::class);
+    }
+
 }

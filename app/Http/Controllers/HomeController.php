@@ -26,8 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $foods = Food::with('state', 'district')->get();
+        $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
         // dd($foods);
         return view('home', compact('foods'));
 

@@ -54,9 +54,6 @@
       <div class="col-md-12">
         <div class="row">
           <div class=" form-group col-sm-12 col-md-12">
-
-            <div class="col-md-6"><h2 class="pull-left">Leave a comment</h2></div>
-            <div class="col-md-6"><a href="{{ action('ReviewController@index', $profile->id) }}" class="btn btn-success pull-right">Comment</a>
             </div>
             </div>
 

@@ -28,5 +28,8 @@ class Food extends Model
       return $this->belongsTo(District::class);
     }
 
+    public function cartDetail(){
+      return $this->hasMany(CartDetail::class,'food_id');
+    }
 
 }

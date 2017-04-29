@@ -1,6 +1,8 @@
-@include('modal.destroy-modal')
 @extends('layouts.app')
+@include('modal.destroy-modal')
+
 @section('content')
+
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2>Cari Makanan</h2>
@@ -33,8 +35,8 @@
                               class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
 
                         <?php else: ?>
-                        <a href="{{ action('SearchController@details', $food->id) }}"
-                          class="btn btn-primary btn-sm">Details</a>
+                        <a href="{{ action('FoodsController@show', $food->id) }}"
+                          class="btn btn-primary btn-sm">Buy</a>
 
                             @endif
                           </td>

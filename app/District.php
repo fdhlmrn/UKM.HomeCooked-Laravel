@@ -18,6 +18,10 @@ class District extends Model
         return $this->hasMany(Food::class);
     }
 
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
+
     public function profile(){
         return $this->belongsToMany(Profile::class);
     }

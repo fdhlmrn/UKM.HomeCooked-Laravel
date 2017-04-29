@@ -21,8 +21,15 @@ Route::get('/map', function() {
     return view('location.index');
 });
 
+    //beli
+Route::post('addToCart', ['middleware' => ['web', 'auth'], 'uses' =>'FoodsController@addToCart']); //bila nak masuk addtocart dia akan lalu web dlu then check betol ke dah login
+Route::get('shopping-cart', ['middleware' => ['web', 'auth'], 'uses' => 'FoodsController@viewCart']);
+
 Route::group(['middleware'=> ['auth']], function() {
     Route::get('/home', 'HomeController@index');
+
+    Route::get('/chart', 'FoodsController@charts');
+
 
     //food
     Route::get('/foods', 'FoodsController@index');
@@ -53,13 +60,17 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
     Route::patch('/profiles/{profile}', 'ProfilesController@update');
     Route::get('/profiles/{user_id}/details', 'ProfilesController@show');
+
+
+    //reviews
     Route::get('/profiles/{user_id}/comments', 'ReviewController@index');  
     Route::get('/profiles/{review}', 'ReviewController@show');
     Route::get('/profiles/{review}/edit', 'ReviewController@edit');
     Route::delete('/profiles/{review}/delete', 'ReviewController@destroy');
     Route::post('/profiles', 'ReviewController@store');
-    Route::post('/profiles/{profile}/like', 'LikesController@likesAction');
 
+    //likes
+    Route::post('/profiles/{profile}/like', 'LikesController@likesAction');
 
     //ajax
     Route::get('/ajax-district', 'SearchController@ajax');

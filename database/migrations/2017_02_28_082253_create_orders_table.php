@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OrdersTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class OrdersTable extends Migration
      */
     public function up()
     {
-      Schema::create('orders', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('user_id')->unsigned();
           $table->string('nama_makanan');
@@ -22,7 +22,7 @@ class OrdersTable extends Migration
           $table->timestamps();
 
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-      });
+        });
     }
 
     /**

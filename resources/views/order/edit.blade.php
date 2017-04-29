@@ -38,6 +38,28 @@
               </div>
             </div>
             <div class="form-group">
+              <label class="col-md-4 control-label">Negeri</label>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <select class="form-control input-sm" name="state" id="states">
+                  @foreach($states as $state )
+                  <option value="{{ $state->id }}">{{ $state->name }}</option>
+                  @endforeach
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label"></label>
+              <div class="col-md-8">
+                <div class="form-group">
+                  <select class="form-control input-sm" name="district" id="district">
+                  <option value="" selected="">Semua Daerah</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
                 <div class="col-sm-offset-10 col-sm-10">
                   <a href="{{ action('OrdersController@index') }}" class="btn btn-default">Cancel</a>
                   <button type="submit" class="btn btn-success">Save</button>

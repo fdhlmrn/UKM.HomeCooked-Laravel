@@ -39,11 +39,11 @@ class SearchController extends Controller
         $district=Input::get('district');
 
         if($district == 'null') {
-        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->where('state_id', $state)->orderBy('id')->paginate(3);
+        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->orWhere('state_id', $state)->orderBy('id')->paginate(3);
         }
 
         else {
-        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->where('state_id', $state)->where('district_id', $district)->orderBy('id')->paginate(3);
+        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->orWhere('state_id', $state)->orWhere('district_id', $district)->orderBy('id')->paginate(3);
         }
 
         // dd($foods);

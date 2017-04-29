@@ -33,45 +33,51 @@
               <br>
               <br>
               <div class="form-group">
-                <div class="col-sm-offset-9 col-sm-9 ">
+                <div class="col-sm-offset-10 ">
                 @if ($profile->user_id == Auth::user()->id)
                   <a href="{{ action('ProfilesController@edit', $profile->user_id) }}" class="btn btn-success">Edit</a>
 
                 @else
-               </div>
-            </div>
-            </div>
-         </div>
-        </div>
 
-      <div class="col-md-offset-11">
+
+              <div class="">
 
               <form method="POST" action="/profiles/{{ $profile->id }}/like" style="display: inline-block;">
                     {{ csrf_field() }}
                     <button class="btn btn-default btn-sm {{ Auth::check() && Auth::user()->alreadyliked($profile) ? 'btn-success' : 'btn-default'}}" style="width: 3em"><span class="glyphicon glyphicon-thumbs-up"></span>
                     {{ $profile->likes->count() }}
                     </button>
-                  </form>
-      </div>
+              </form>
+              </div>
+               @endif
+
+               </div>
+            </div>
+            </div>
+         </div>
+        </div>
+
+
     </div>
-  @endif
   <div class="panel-body">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
           <div class=" form-group col-sm-12 col-md-12">
 
+            
             <div class="col-md-6"><h2 class="pull-left">Leave a comment</h2></div>
+            @if ($profile->user_id != Auth::user()->id)
             <div class="col-md-6"><a href="{{ action('ReviewController@index', $profile->id) }}" class="btn btn-success pull-right">Comment</a>
+              {{-- false expr --}}
+            @endif
             </div>
             </div>
 
         
+         @foreach($reviews as $review)
+         {{-- {{ dd($review) }} --}}
         <div class="list-group notes-group">
-
-        <!--note1 -->
-
-        @foreach($reviews as $review)
 
         <div class="col-md-12 card card-block">
               <hr style="background:#F87431; border:0; height:2px" />
@@ -85,21 +91,26 @@
             </p>
             
 
-            @if ($profile->user_id == Auth::user()->id)
-
+            @if ($review->user_id == Auth::user()->id)
+            <div>
             <a class="btn btn-sm btn-info pull-xs-left" href="{{ action('ReviewController@edit', $review->id) }}">
                 Edit
             </a>
-            <form action="{{ action('ReviewController@destroy',$review->id) }}" class="pull-xs-right" method="POST">
+            <a href="{{ action('ReviewController@destroy', $review->id) }}" class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
+{{--             <form action="{{ action('ReviewController@destroy',$review->id) }}" class="pull-xs-right" method="POST">
                 {{ csrf_field() }}
                 {{method_field('DELETE')}}
-                <input class="btn btn-sm btn-danger" type="submit" value="Delete">
+                <input class="btn btn-sm btn-danger" type="submit" value="Delete"> --}}
             @endif
-
+              
             </form>
+            </div>
         </div>
-
         @endforeach
+
+        <div class="pagination-bar text-center">
+            {{ $reviews->render() }}
+        </div>
             </div>
         </div>
       </div>
