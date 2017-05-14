@@ -32,8 +32,8 @@ class User extends Authenticatable
         return $this->hasMany(Food::class);
     }
 
-    public function order(){
-      return $this->hasMany(Order::class);
+    public function pesanans(){
+      return $this->hasMany(Pesanan::class);
     }
 
     public function pivots(){
@@ -56,5 +56,9 @@ class User extends Authenticatable
 
     public function alreadyLiked(Profile $profile){
       return $profile->liked->contains('user_id', $this->id);
+    }
+
+    public function orders() {
+      return $this->hasMany(Order::class);
     }
 }

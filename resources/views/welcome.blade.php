@@ -85,7 +85,6 @@
                 <div class="links">
                     <a href="{{ url( '/foods' )}}">Jual Makanan</a>
                     <a href="{{ url( '/search' )}}">Cari Makanan</a>
-                    <a href="{{ url( '/orders' )}}">Pesan Makanan</a>
                     <a href="{{ url( '/search' )}}">Profil</a>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Food;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -26,10 +27,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
+        // $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
+
+        $foods = Food::with('state', 'district')->where([
+           ['saiz_hidangan', '>', '0'],
+          ])->orderBy('created_at', 'asc')->paginate(7);
         // dd($foods);
+        // dd($foods)
         return view('home', compact('foods'));
 
+
+    }
+
+    public function error()
+    {
+        $foods = Food::with('state', 'district')->where([
+           ['saiz_hidangan', '>', '0'],
+          ])->orderBy('created_at', 'asc')->paginate(7);
+
+        return view('home', compact('foods'));
 
     }
 }

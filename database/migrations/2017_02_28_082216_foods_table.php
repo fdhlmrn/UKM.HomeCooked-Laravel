@@ -20,6 +20,7 @@ class FoodsTable extends Migration
           $table->integer('district_id')->index()->unsigned();
           $table->string('nama_makanan');
           $table->integer('saiz_hidangan');
+          $table->string('image');
           $table->double('harga');
           $table->timestamps();
 

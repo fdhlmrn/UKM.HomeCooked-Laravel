@@ -13,19 +13,23 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+
     {{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> --}}
 
-    {!! Charts::assets() !!}
 
     
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <!-- Scripts -->
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified Javacript -->
+{{--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> --}}
 
     <script>
         window.Laravel = {!! json_encode([
@@ -39,8 +43,7 @@
 
     </script>
 
-    {{-- styles --}}
-{{--       <style>
+      <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
@@ -50,18 +53,7 @@
         margin: 0 auto;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        overflow-y:hidden !important;
-
-        padding: 0;
-      }
-
-      .divider{
-        margin: 10px;
-      }       
-    </style> --}}
+    </style>
 
 
     <script >
@@ -114,13 +106,19 @@
                         &nbsp;
                         <li><a href="{{url('foods')}}">Jualan</a></li>
                         <li><a href="{{url('search')}}">Cari Makanan</a></li>
-                        <li><a href="{{url('orders')}}">Pesan Makanan</a></li>
                         <li><a href="{{url('profiles')}}">Profile</a></li>
 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                      <li>
+                          <a href="{{ route('product.shoppingCart') }}">
+                          <i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart 
+                          <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty: ''}}</span>
+                          </a>
+                      </li>
+                      <li><a href="{{ route('profile.order')}}">Orders</a> </li>
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -196,6 +194,8 @@
       });
 
     </script>
+
+    <script src="{{ asset('js/add-image.js') }}"></script>
 
 
 </body>

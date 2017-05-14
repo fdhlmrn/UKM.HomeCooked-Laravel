@@ -43,7 +43,7 @@
                             <a href="{{ action('FoodsController@destroy', $food->id) }}"
                              class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
                         @else
-                            <a href="{{ action('FoodsController@show', $food->id) }}"
+                            <a href="{{ action('FoodsController@cart', $food->id) }}"
                             class="btn btn-primary btn-sm">Buy</a>
                         @endif
 

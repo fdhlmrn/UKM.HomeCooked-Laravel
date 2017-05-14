@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Order;
-use App\State;
-use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -16,10 +13,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
-
-        $orders = Order::with('state', 'district')->paginate(5);
-        return view('order.index', compact('orders'));
+        $orders = Order::where('id', Auth::user()->id)->first();
     }
 
     /**
@@ -30,10 +24,6 @@ class OrdersController extends Controller
     public function create()
     {
         //
-
-        $states = State::all();
-
-        return view('order.create', compact('states'));
     }
 
     /**
@@ -45,17 +35,6 @@ class OrdersController extends Controller
     public function store(Request $request)
     {
         //
-        $order = new Order;
-        $order->nama_makanan = $request->nama_makanan;
-        $order->saiz_hidangan = $request->saiz_hidangan;
-        $order->harga = $request->harga;
-        $order->state_id = $request->state;
-        $order->district_id = $request->district;
-        $order->user_id = Auth::user()->id;
-        // dd($order); 
-        $order->save();
-
-        return redirect()->action('OrdersController@index')->withMessage('Order has been added');
     }
 
     /**
@@ -78,9 +57,6 @@ class OrdersController extends Controller
     public function edit($id)
     {
         //
-        $states = State::all();
-        $order = Order::findOrFail($id);
-        return view('order.edit', compact('order'))->with('states', $states);
     }
 
     /**
@@ -93,21 +69,6 @@ class OrdersController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request, [
-          'nama_makanan' => 'required',
-          'saiz_hidangan' => 'required',
-          'harga' => 'required',
-        ]);
-
-        $order = Order::findOrFail($id);
-        $order->nama_makanan = $request->nama_makanan;
-        $order->saiz_hidangan = $request->saiz_hidangan;
-        $order->harga = $request->harga;
-        $order->state_id = $request->state;
-        $order->district_id = $request->district;
-        $order->save();
-
-        return redirect()->action('OrdersController@index')->withMessage('Your food has been updated');
     }
 
     /**
@@ -119,8 +80,5 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         //
-        $order = Order::findOrFail($id);
-        $order->delete();
-        return back()->withError('Order has been deleted');
     }
 }

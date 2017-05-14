@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+
 
 class Food extends Model
 {
     //
+    use Notifiable;
+
     protected $fillable = [
       'nama_makanan', 'saiz_hidangan', 'harga', 
     ];
@@ -30,6 +34,10 @@ class Food extends Model
 
     public function cartDetail(){
       return $this->hasMany(CartDetail::class,'food_id');
+    }
+
+    public function bought(){
+      return $this->belongsToMany(Bought::class,'food_id');
     }
 
 }

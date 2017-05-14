@@ -7,7 +7,10 @@ use App\User;
 use App\State;
 use App\District;
 use App\Review;
+use App\Food;
 Use App\Profile;
+Use App\Bought;
+Use App\Order;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -117,5 +120,36 @@ class ProfilesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getOrder() {
+        $orders = Auth::user()->orders;
+        $orders->transform(function($order, $key) {
+            $order->cart = unserialize($order->cart);
+            return $order;
+        });
+        // dd($orders);
+        return view('profile.order', compact('orders'));
+    }
+
+    public function getBought() {
+        $boughts = Bought::where('seller_id',  Auth::user()->id)->get()->sortByDesc('created_at');
+        foreach ($boughts as $bought) {
+            $buyer = User::where('id', $bought->buyer_id)->first();
+            $food = Food::where('id', $bought->food_id)->first();
+        }
+
+        // dd($food);
+        return view('jualan.sold', compact('boughts'))->with('buyer', $buyer)->with('food', $food);
+    }
+
+    public function testEmel($id){
+        $boughts = Bought::where('seller_id',  Auth::user()->id)->get()->sortByDesc('created_at');
+        foreach ($boughts as $bought) {
+            $buyer = User::where('id', $bought->buyer_id)->first();
+            $food = Food::where('id', $bought->food_id)->first();
+        }
+      $bought = Bought::findorFail($id);
+      dd($bought);
     }
 }

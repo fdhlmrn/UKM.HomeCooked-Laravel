@@ -21,9 +21,7 @@ Route::get('/map', function() {
     return view('location.index');
 });
 
-    //beli
-Route::post('addToCart', ['middleware' => ['web', 'auth'], 'uses' =>'FoodsController@addToCart']); //bila nak masuk addtocart dia akan lalu web dlu then check betol ke dah login
-Route::get('shopping-cart', ['middleware' => ['web', 'auth'], 'uses' => 'FoodsController@viewCart']);
+
 
 Route::group(['middleware'=> ['auth']], function() {
     Route::get('/home', 'HomeController@index');
@@ -32,6 +30,7 @@ Route::group(['middleware'=> ['auth']], function() {
 
 
     //food
+
     Route::get('/foods', 'FoodsController@index');
     Route::get('/foods/create', 'FoodsController@create');
     Route::post('/foods', 'FoodsController@store');
@@ -46,20 +45,13 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::get('/search', 'SearchController@index');
     Route::get('/search/find', 'SearchController@find');
 
-    //order
-    Route::get('/orders', 'OrdersController@index');
-    Route::get('/orders/create', 'OrdersController@create');
-    Route::post('/orders', 'OrdersController@store');
-    Route::get('/orders/{order}', 'OrdersController@show');
-    Route::get('/orders/{order}/edit', 'OrdersController@edit');
-    Route::patch('/orders/{order}', 'OrdersController@update');
-    Route::delete('/orders/{order}/delete', 'OrdersController@destroy');
-
     //profiles
     Route::get('/profiles', 'ProfilesController@index');
     Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
     Route::patch('/profiles/{profile}', 'ProfilesController@update');
     Route::get('/profiles/{user_id}/details', 'ProfilesController@show');
+    Route::get('/bought', 'ProfilesController@getBought');
+
 
 
     //reviews
@@ -74,7 +66,19 @@ Route::group(['middleware'=> ['auth']], function() {
 
     //ajax
     Route::get('/ajax-district', 'SearchController@ajax');
-    Route::get('/ajax-subdistrict', 'SearchController@ajax2');
+    // Route::get('/ajax-subdistrict', 'SearchController@ajax2');
+
+
+    //beli
+    Route::get('/cart/{id}', 'FoodsController@cart');
+    Route::get('/reduce/{id}', 'FoodsController@getReduceByOne')->name('food.reduce');
+    Route::get('/remove/{id}', 'FoodsController@getRemoveItem')->name('food.remove');
+
+    Route::get('/shopping-cart', 'FoodsController@getCart')->name('product.shoppingCart');
+    Route::get('/orders', 'ProfilesController@getOrder')->name('profile.order');
+    Route::get('/checkout', 'FoodsController@getCheckout')->name('checkout');
+    Route::post('/checkout', 'FoodsController@postCheckout')->name('checkout');
+
 
 
 
@@ -84,3 +88,12 @@ Route::group(['middleware'=> ['auth']], function() {
 });
 
 Auth::routes();
+
+    // //order
+    // Route::get('/orders', 'OrdersController@index');
+    // Route::get('/orders/create', 'OrdersController@create');
+    // Route::post('/orders', 'OrdersController@store');
+    // Route::get('/orders/{order}', 'OrdersController@show');
+    // Route::get('/orders/{order}/edit', 'OrdersController@edit');
+    // Route::patch('/orders/{order}', 'OrdersController@update');
+    // Route::delete('/orders/{order}/delete', 'OrdersController@destroy');

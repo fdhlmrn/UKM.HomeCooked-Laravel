@@ -4,10 +4,9 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2>Jualan<a href="{{ url('/foods/create') }}" class="btn btn-info pull-right"
-        role="button">Jualan Baru</a></h2>      
-        <h2>Charts<a href="{{ url('/chart') }}" class="btn btn-info pull-right"
-        role="button">Charts</a></h2>
-
+        role="button">Jualan Baru</a></h2>
+      <h2><a href="{{ url('/bought') }}" class="btn btn-info pull-right"
+        role="button">Jualan Baru</a></h2>
       </div>
       <div class="panel-body">
         <div class="row">
@@ -38,15 +37,7 @@
                           
                           <a href="{{ action('FoodsController@edit', $food->id) }}"
                             class="btn btn-primary btn-sm">Edit</a>
-{{--                             <br>
-                            <br>
-    
-                          <form action="{{ action('FoodsController@destroy',$food->id) }}" method="POST">  
-                            {{ csrf_field() }}
-                            {{method_field('DELETE')}}
-                            <input class="btn btn-sm btn-danger" type="submit" value="Delete">
-                          </form> --}}
-                                                      <a href="{{ action('FoodsController@destroy', $food->id) }}"
+                           <a href="{{ action('FoodsController@destroy', $food->id) }}"
                              class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
                         @endif
                             
