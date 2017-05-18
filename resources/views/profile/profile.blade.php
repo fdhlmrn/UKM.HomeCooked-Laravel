@@ -10,7 +10,7 @@
       <div class="col-md-12">
         <div class="row">
           <div class="col-sm-6 col-md-4">
-            <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+            <img src="{{ asset("$user->image") }}" alt="" class="img-rounded img-responsive" />
           </div>
           @foreach ($profiles as $profile)
             <div class="col-sm-6 col-md-8">
@@ -18,26 +18,17 @@
               <br> 
               <h4><i class="glyphicon glyphicon-envelope"></i>    {{$profile->user->email}}</h4>
               <br>
-              <h4><i class="glyphicon glyphicon-earphone"></i>{{$profile->no_phone}}</h4>
+              <h4><i class="fa fa-phone"></i> {{$profile->no_phone}}</h4>
               <br>
-              <h4><i class=" glyphicon glyphicon-home"></i>{{$profile->address}},
-              <br>
-              {{$profile->district}},
-              <br>
-              {{$profile->state}}
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
+              <h4><i class="fa fa-home"></i>  {{$profile->address}} <br>
+              {{$profile->location}},
               <br>
               <br>
               <br>
               <div class="form-group">
-                <div class="col-sm-offset-10 col-sm-10">
+                <div class="col-sm-offset-9 col-sm-10">
                 @if ($profile->user_id == Auth::user()->id)
-                  <a href="{{ action('ProfilesController@edit', $profile->user_id) }}" class="btn btn-default">Edit</a>
+                  <a href="{{ action('ProfilesController@edit', $profile->user_id) }}" class="btn btn-success">Edit</a>
                 @endif
                 </div>
               </div>
@@ -48,8 +39,8 @@
           </div>
         </div>
       </div>
-
-      <div class="panel-body">
+      
+  <div class="panel-body">
     <div class="row">
       <div class="col-md-12">
         <div class="row">
@@ -57,10 +48,26 @@
             </div>
             </div>
 
+      {{--       <div class="media media-post">
+              <a class="pull-left author" href="{{ action('ProfilesController@show', $usernow->id)}}">
+                <div class="avatar">
+                  <img class="img-rounded img-responsive" style="width: 64px;height: 64px;" alt="64x64" src="{{$user->image}}">{{$user->name}}
+                </div>
+              </a>
+              <div class="media-body">
+                  <textarea class="form-control" placeholder="Write a nice reply or go home..." rows="4"></textarea>
+                  <div class="media-footer">
+                    <a href="#pablo" class="btn btn-primary pull-right">
+                      <i class="material-icons">reply</i> Reply
+                    </a>
+                  </div>
+              </div>
+            </div> --}}
+
         
         <div class="list-group notes-group">
 
-        <!--note1 -->
+        <!--review -->
 
         @foreach($reviews as $review)
 

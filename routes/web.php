@@ -24,7 +24,7 @@ Route::get('/map', function() {
 
 
 Route::group(['middleware'=> ['auth']], function() {
-    Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'HomeController@index')->name('home');
 
     Route::get('/chart', 'FoodsController@charts');
 
@@ -71,7 +71,9 @@ Route::group(['middleware'=> ['auth']], function() {
 
     //beli
     Route::get('/cart/{id}', 'FoodsController@cart');
+    Route::get('/carthome/{id}', 'FoodsController@carthome');
     Route::get('/reduce/{id}', 'FoodsController@getReduceByOne')->name('food.reduce');
+    Route::get('/reducehome/{id}', 'FoodsController@getReduceByOneHome')->name('food.reducehome');
     Route::get('/remove/{id}', 'FoodsController@getRemoveItem')->name('food.remove');
 
     Route::get('/shopping-cart', 'FoodsController@getCart')->name('product.shoppingCart');
@@ -80,6 +82,15 @@ Route::group(['middleware'=> ['auth']], function() {
     Route::post('/checkout', 'FoodsController@postCheckout')->name('checkout');
 
 
+
+    Route::post('location', function () {
+
+        $latitude = request('latitude');
+        $longitude = request('longitude');
+
+       return "latitude = $latitude and longitude = $longitude";
+
+    })->name('handle.location');
 
 
     // Route::resource('foods', 'FoodsController');

@@ -2,7 +2,62 @@
 
 @section('content')
 
+ <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Order</h2>
 
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              @foreach($orders as $order)
+                <div class="card card-block">
+                <h4 class="card-title">
+				<strong>Total Price: RM {{ $order->totalPrice }}</strong> <p class="pull-right">{{ $order->created_at->diffForHumans() }}</p>
+                </h4>
+                </div>
+              <table class="table table-striped">
+
+                <thead>
+
+                  <tr>
+                    <th width="15%">Pembeli</th>
+                    <th width="15%">No Phone</th>
+                    <th width="15%">Address</th>
+                    <th width="25%">Location</th>
+                    <th width="35%">Makanan</th>
+                    <th width="15%">Saiz Hidangan</th>
+                    <th width="15%">Harga(RM)</th>
+                  </tr>
+                </thead>
+                <tbody pull-right>
+				@forelse ($order->cart->foods as $food)
+				{{-- {{dd($food['food']->user->name)}} --}}
+                    <tr>
+                      <td>{{ $food['food']->user->name }}</td>  
+                      <td>{{ $food['food']->user->profile->no_phone }}</td>  
+                      <td>{{ $food['food']->user->profile->address }}</td>  
+                      <td>{{ $food['food']['location'] }}</td>
+                      <td>{{ $food['food']['nama_makanan'] }}</td>
+                      <td>{{ $food['qty'] }}</td>
+                      <td>{{ $food['harga'] }}</td>
+                        </tr>
+                      @empty
+                        <tr>
+                          <td colspan="6">Looks like there is no post available.</td>
+                        </tr>
+                      @endforelse
+                    </tbody>
+                  </table>
+                  {{-- {{ $orders->links() }} --}}
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+{{-- 
         @foreach($orders as $order)
         <div class="card card-block">
 
@@ -10,7 +65,8 @@
 				<strong>Total Price: RM {{ $order->totalPrice }}</strong>
                 </h4>
             </a>
-            {{-- {{ dd($order->cart)}} --}}
+            </div>
+            {{ dd($order->cart)}}
 
 		@foreach ($order->cart->foods as $food)
 
@@ -21,7 +77,7 @@
 
         </div>
 
-        @endforeach
+        @endforeach --}}
 
 
 {{-- 

@@ -20,27 +20,13 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Negeri</label>
+              <label class="col-md-4 control-label">Location</label>
               <div class="col-md-8">
                 <div class="form-group">
-                  <select class="form-control input-sm" name="state" id="states">
-                  @foreach($states as $state )
-                  <option value="{{ $state->id }}">{{ $state->name }}</option>
-                  @endforeach
-                  </select>
+                  <input class="form-control" id="location" type="text" name="location">
                 </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-4 control-label"></label>
-              <div class="col-md-8">
-                <div class="form-group">
-                  <select class="form-control input-sm" name="district" id="district">
-                  <option value="null" selected>Semua Daerah</option>
-                  </select>
-                </div>
-              </div>
-            </div>        
+            </div>      
             <div class="form-group">
               <div class="col-sm-offset-10">
               

@@ -12,16 +12,26 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/material-kit.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/tonystar/float-label-css/v1.0.2/dist/float-label.min.css"/>
 
-    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <!--Javacript -->
+    {{-- <link href="{{ asset('js/material-kit.css') }}" rel="stylesheet"> --}}
 
 
+
+
+    
     {{-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"> --}}
 
 
     
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+{{--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> --}}
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -30,7 +40,7 @@
 
   <!-- Latest compiled and minified Javacript -->
 {{--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> --}}
-
+    
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -47,13 +57,20 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 70%;
-        width: 70%;
-        display: block;
+        height: 700px;
+        width: 100%;
+        display: block !important;
         margin: 0 auto;
       }
       /* Optional: Makes the sample page fill the window. */
-    </style>
+
+      /*background*/
+      body {
+      background-image: url("/images/background/Skylight_Reflect_L_27.jpg");
+      background-attachment: fixed;
+      background-size: cover;
+      }
+      </style>
 
 
     <script >
@@ -82,7 +99,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-transparent navbar-abosolute">
             <div class="container">
                 <div class="navbar-header">
 
@@ -112,23 +129,23 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
-                      <li>
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                        <li>
                           <a href="{{ route('product.shoppingCart') }}">
                           <i class="fa fa-shopping-cart" aria-hidden="true"></i>Shopping Cart 
                           <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty: ''}}</span>
                           </a>
                       </li>
                       <li><a href="{{ route('profile.order')}}">Orders</a> </li>
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
+                                
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -182,6 +199,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1nhzyIsw68EpdGSDJEzZ4nm1Qsld6Ro8&callback=initMap">
+    </script>
     <script>
       $(document).on("click", "#confirm-modal", function(e) {
       window.console&&console.log('foo');
@@ -194,7 +214,7 @@
       });
 
     </script>
-
+    @yield('script')
     <script src="{{ asset('js/add-image.js') }}"></script>
 
 

@@ -10,7 +10,7 @@
 				{{ csrf_field() }}
 
 		<input type="hidden" name="totalPrice" value="{{$total}}">
-				<button type="submit" class="btn btn-success">Buy Now</button>
+				<button type="submit" class="btn btn-success">Confirm Purchase</button>
 			</form>
 
 		</div>

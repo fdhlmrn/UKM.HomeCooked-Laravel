@@ -4,6 +4,15 @@
 
     <div id="map"></div>
     <script>
+
+    $(function() {
+       $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    });
+   
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
@@ -12,7 +21,7 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
-          zoom: 6
+          zoom: 15
         });
         infoWindow = new google.maps.InfoWindow;
 
@@ -28,6 +37,14 @@
             infoWindow.setContent('Location found.');
             infoWindow.open(map);
             map.setCenter(pos);
+            var jqXHR = $.ajax({
+              method: 'POST',
+              url: '{{ route('handle.location') }}',
+              data: {
+                latitude: pos.lat,
+                longitude: pos.lng
+              }
+            });
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -48,14 +65,5 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMfIZfonCCMPWHqEwoKUIvAHHdoFRnG4&callback=initMap">
     </script>
-
-            <div class="form-group">
-              <label class="col-md-4 control-label"></label>
-              <div class="col-md-8">
-                <div class="form-group">
-                  <input class="form-control" type="text" name="lat" placeholder="lat">
-                </div>
-              </div>
-            </div>
   
 @endsection

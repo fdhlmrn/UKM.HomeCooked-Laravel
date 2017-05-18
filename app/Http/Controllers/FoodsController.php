@@ -92,12 +92,14 @@ class FoodsController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
         $food = new Food;
         $food->nama_makanan = $request->nama_makanan;
         $food->saiz_hidangan = $request->saiz_hidangan;
         $food->harga = $request->harga;
-        $food->state_id = $request->state;
-        $food->district_id = $request->district;
+        $food->location = $request->location;
+        $food->latitude = $request->latitude;
+        $food->longitude = $request->longitude;
         $food->user_id = Auth::user()->id;
 
         if ($request->hasFile('image')){
@@ -137,9 +139,8 @@ class FoodsController extends Controller
     {
         //
 
-        $states = State::all();
         $food = Food::findOrFail($id);
-        return view('jualan.edit', compact('food'))->with('states', $states);
+        return view('jualan.edit', compact('food'));
     }
 
     /**
@@ -162,8 +163,9 @@ class FoodsController extends Controller
         $food->nama_makanan = $request->nama_makanan;
         $food->saiz_hidangan = $request->saiz_hidangan;
         $food->harga = $request->harga;
-        $food->state_id = $request->state;
-        $food->district_id = $request->district;
+        $food->location = $request->location;
+        $food->latitude = $request->latitude;
+        $food->longitude = $request->longitude;
 
         if ($request->hasFile('image')){
           $this->validate($request, [
@@ -203,14 +205,15 @@ class FoodsController extends Controller
         if (!is_null($cart->foods)) {
           // dd($cart);
           foreach ($cart->foods as $key => $value) {
-          // dd($cart['qty']);
+          // dd($cart);
           $makanan = Food::findorFail($id);
           // dd($cart['food']->user_id);
           $quantity = $value['qty'];
+          // dd($quantity);
           // dd($quantity, $makanan->saiz_hidangan);
               // dd($quantity > $makanan->saiz_hidangan);
-          if ($quantity >= $makanan->saiz_hidangan)
-            return redirect()->back()->withMessage('Food is not enough');
+          if (($key == $id) && ($quantity >= $makanan->saiz_hidangan))
+            return redirect()->action('HomeController@index')->withErrors("Jumlah {$makanan->nama_makanan} tidak mencukupi");
           }
         }
         // dd($food);
@@ -220,12 +223,47 @@ class FoodsController extends Controller
 
         $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
 
-        return redirect()->action('HomeController@index')->withMessage('Your food has been updated');
+        return redirect()->action('HomeController@index')->withMessage('Makanan telah dikemaskini');
+    }
+
+    public function carthome(Request $request, $id)
+    {
+        $food = Food::findOrFail($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+      
+        if (!is_null($cart->foods)) {
+          // dd($cart);
+          foreach ($cart->foods as $key => $value) {
+          // dd($cart['qty']);
+          $makanan = Food::findorFail($id);
+          // dd($cart['food']->user_id);
+          $quantity = $value['qty'];
+          // dd($quantity, $makanan->saiz_hidangan);
+              // dd($quantity > $makanan->saiz_hidangan);
+          if ($quantity >= $makanan->saiz_hidangan)
+            return redirect()->back()->withErrors("Jumlah {$makanan->nama_makanan} tidak mencukupi");
+          }
+        }
+        // dd($food);
+        $cart->add($food, $food->id);
+
+        $request->session()->put('cart', $cart);
+
+        $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
+
+        return redirect()->action('FoodsController@getCart')->withMessage('Makanan telah dikemaskini');
     }
 
     public function getReduceByOne($id) {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
+
+        if (!Session::has('cart')) {
+
+        return redirect()->route('home')->withErrors('Tiada makanan untuk dibuang');
+        }
+
         $cart->reduceByOne($id);
 
         if (count($cart->foods) > 0){
@@ -236,6 +274,28 @@ class FoodsController extends Controller
         }
 
         return redirect()->route('product.shoppingCart');
+    }
+
+    public function getReduceByOneHome($id) {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        //bila cart kosong tapi nak remove jgk
+        if (!Session::has('cart')) {
+
+        return redirect()->route('home')->withErrors('Tiada makanan untuk dibuang');
+        }
+
+        $cart->reduceByOne($id);
+
+        if (count($cart->foods) > 0){
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+
+        }
+
+        return redirect()->route('home')->withMessage('Makanan dibuang');
     }
 
     public function getRemoveItem($id) {
@@ -279,7 +339,16 @@ class FoodsController extends Controller
             return view('shop.shopping-cart');
         }
         $oldCart = Session::get('cart');
- 
+        
+        foreach ($oldCart->foods as $id => $cart) {
+          $makanan = Food::findorFail($id);
+          $quantity = $cart['qty'];
+
+          if ($makanan->saiz_hidangan <= $quantity) {
+            return redirect()->back()->withErrors('Makanan dibeli orang lain');
+          }
+
+        }
         foreach ($oldCart->foods as $id => $cart) {
           // dd($cart['qty']);
           $makanan = Food::findorFail($id);

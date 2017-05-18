@@ -10,25 +10,18 @@
       <div class="col-md-12">
         <div class="row">
           <div class="col-sm-6 col-md-4">
-            <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+
+            <img src="{{ asset("$user->image") }}" alt="" class="img-rounded img-responsive" />
           </div>
             <div class="col-sm-6 col-md-8">
               <h2>{{$profile->user->name}}</h2>    
               <br> 
               <h4><i class="glyphicon glyphicon-envelope"></i>    {{$profile->user->email}}</h4>
               <br>
-              <h4><i class="glyphicon glyphicon-earphone"></i>{{$profile->no_phone}}</h4>
+              <h4><i class="fa fa-phone"></i> {{$profile->no_phone}}</h4>
               <br>
-              <h4><i class=" glyphicon glyphicon-home"></i>{{$profile->address}},
-              <br>
-              {{$profile->district}},
-              <br>
-              {{$profile->state}}
-              <br>
-              <br>
-              <br>
-              <br>
-              <br>
+              <h4><i class="fa fa-home"></i>  {{$profile->address}} <br>
+              {{$profile->location}},
               <br>
               <br>
               <br>
@@ -44,7 +37,8 @@
 
               <form method="POST" action="/profiles/{{ $profile->id }}/like" style="display: inline-block;">
                     {{ csrf_field() }}
-                    <button class="btn btn-default btn-sm {{ Auth::check() && Auth::user()->alreadyliked($profile) ? 'btn-success' : 'btn-default'}}" style="width: 3em"><span class="glyphicon glyphicon-thumbs-up"></span>
+                    <button class="btn btn-just-icon btn-danger {{ Auth::check() && Auth::user()->alreadyliked($profile) ? 'btn-success' : 'btn-default'}}" style="width: 3em">
+                    <i class="material-icons">favorite</i>
                     {{ $profile->likes->count() }}
                     </button>
               </form>
@@ -63,13 +57,36 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
+          <div class="col-md-6"><h2 class="pull-left">Comments</h2></div>
           <div class=" form-group col-sm-12 col-md-12">
 
-            
-            <div class="col-md-6"><h2 class="pull-left">Leave a comment</h2></div>
             @if ($profile->user_id != Auth::user()->id)
-            <div class="col-md-6"><a href="{{ action('ReviewController@index', $profile->id) }}" class="btn btn-success pull-right">Comment</a>
-              {{-- false expr --}}
+
+            <div class="media media-post col-md-1">
+              <a class="pull-left author" href="{{ action('ProfilesController@show', $usernow->id)}}">
+                <div class="avatar">
+                  <img class="img-rounded img-responsive" style="width: 64px;height: 64px;" alt="64x64" src="{{$usernow->image}}">{{$usernow->name}}
+                </div>
+              </a>
+            </div>
+            <div class="col-md-11">
+              <form class="form-horizontal" action="{{ action('ReviewController@store') }}" method="POST" enctype="multipart/form-data">
+              {{ csrf_field() }}
+
+              <input type="hidden" name="profile" value="{{$profile->id}}">
+
+              <input class="form-control" name="title" placeholder="Title">
+
+                <textarea class ="form-control" name="content" placeholder="Enter your post" rows="4" value="{{ old('post_content') }}" maxlength="500"></textarea>
+                <p class="text-muted">Maxmimum character is 500</p>
+                <button type="submit" class="btn btn-success pull-right">Reply</button>
+                </form>
+
+            </div>
+            </div>
+            </div>
+
+{{--             <div class="col-md-6"><a href="{{ action('ReviewController@index', $profile->id) }}" class="btn btn-success pull-right">Comment</a> --}}
             @endif
             </div>
             </div>

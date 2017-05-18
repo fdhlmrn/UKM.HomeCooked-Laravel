@@ -12,6 +12,11 @@
 
         <!-- Styles -->
         <style>
+              body {
+                background-image: url("/images/background/Skylight_TreasureIsland_R_27.png");
+                background-attachment: fixed;
+                background-size: cover;
+            }
             html, body {
                 background-color: #fff;
                 color: #636b6f;

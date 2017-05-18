@@ -14,31 +14,44 @@
             <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
-                  <tr>
-                    <th width="55%">Makanan</th>
-                    <th width="15%">Quantity</th>
-                    <th width="15%">By</th>
-                    <th width="15%">Action</th>
-                  </tr>
-                </thead>
-                <tbody pull-right>
-                  @forelse($foods as $food)
                     <tr>
-                      <td>{{ $food->nama_makanan}}</td>
-                      <td>{{ $food->saiz_hidangan }}</td>
-                      <td>{{ $food->user->name }}</td>
-                      <td>
+                        <th>Gambar</th>
+                        <th>Makanan</th>
+                        <th>Siaz Hidangan</th>
+                        <th>Harga(RM)</th>
+                        <th>Lokasi</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <!--/Table head-->
+
+                <!--Table body-->
+                <tbody>
+                  @forelse ($foods as $food)
+                    <!--First row-->
+                    <tr>
+                        <th scope="row">
+                            <img style="height: 120px; width: 120px;" src="{{$food->image}}" alt="" class="img-fluid">
+                        </th>
+                        <td>
+                            <h5><strong>{{$food->nama_makanan}}</strong></h5>
+                            <p class="text-muted">by <a href="{{ action('ProfilesController@show', $food->user->id)}}"> {{ $food->user->name }}</p></a>
+                            <small class="">{{ $food->created_at->diffForHumans() }}</small>
+
+                        </td>
+                        <td>{{ $food->saiz_hidangan }}</td>
+                        <td>{{ $food->harga }}</td>
+                        <td>{{ $food->location}} </td>
+                        <td>
                         @if( $food->user_id == Auth::user()->id)
-                          <a href="{{ action('OrdersController@edit', $food->id) }}"
-                            class="btn btn-primary btn-sm">Edit</a>
-                            <a href="{{ action('OrdersController@destroy', $food->id) }}"
-                              class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
-
-                        <?php else: ?>
-                        <a href="{{ action('FoodsController@show', $food->id) }}"
-                          class="btn btn-primary btn-sm">Buy</a>
-
-                            @endif
+                               <a href="{{ action('FoodsController@edit', $food->id) }}" class="btn btn-info btn-sm">Edit</a>
+                               <a href="{{ action('FoodsController@destroy', $food->id) }}" class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
+                        @else
+                                <a href="{{ action('FoodsController@getReduceByOneHome', $food->id) }}"
+                                class="btn btn-danger btn-sm">-</a>
+                                <a href="{{ action('FoodsController@cart', $food->id) }}"
+                                class="btn btn-success btn-sm">+</a>
+                        @endif
                           </td>
                         </tr>
                       @empty
@@ -48,7 +61,9 @@
                       @endforelse
                     </tbody>
                   </table>
-                  {{-- {{ $sale->links() }} --}}
+                  <div class="pagination-bar text-center">
+                    {{ $foods->render() }}
+                  </div>
                 </div>
               </div>
             </div>

@@ -53,7 +53,7 @@ class EmelBought extends Notification
     {
         return (new MailMessage)
                     ->greeting("Hello {$this->penjual}")
-                    ->line("{$this->pembeli} has bought {$this->jumlah} {$this->food} with a total of {$this->harga}")
+                    ->line("{$this->pembeli} has bought {$this->jumlah} {$this->food} with a total of RM {$this->harga}")
                     ->line('Thank you for using our application!');
     }
 

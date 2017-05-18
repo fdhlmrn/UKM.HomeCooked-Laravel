@@ -35,16 +35,30 @@ class SearchController extends Controller
     public function find()
     {
         $keyword=Input::get('keyword');
-        $state=Input::get('state');
-        $district=Input::get('district');
+        $location=Input::get('location');
+        $foods = Food::where([
+            ['nama_makanan', 'LIKE', "%$keyword%"],
+            ['saiz_hidangan', '>', "0"],
+            ['location', 'LIKE', "%$location%"],
+            ])->paginate(5);
+        
 
-        if($district == 'null') {
-        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->orWhere('state_id', $state)->orderBy('id')->paginate(3);
-        }
+        // $state=Input::get('state');
+        // $district=Input::get('district');
 
-        else {
-        $foods = Food::where('nama_makanan', 'LIKE', "%$keyword%")->orWhere('state_id', $state)->orWhere('district_id', $district)->orderBy('id')->paginate(3);
-        }
+        // if($district == 'null') {
+        // $foods = Food::where([
+        //     ['nama_makanan', 'LIKE', "%$keyword%"],
+        //     ['saiz_hidangan', '>', "0"],
+        //     ])->Where('state_id', $state)->orderBy('id')->paginate(5);
+        // }
+
+        // else {
+        // $foods = Food::where([
+        //     ['nama_makanan', 'LIKE', "%$keyword%"],
+        //     ['saiz_hidangan', '>', "0"],
+        //     ])->Where('state_id', $state)->orWhere('district_id', $district)->orderBy('id')->paginate(5);
+        // }
 
         // dd($foods);
         return view('search.result', compact('foods'));

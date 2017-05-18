@@ -4,9 +4,8 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2>Jualan<a href="{{ url('/foods/create') }}" class="btn btn-info pull-right"
-        role="button">Jualan Baru</a></h2>
-      <h2><a href="{{ url('/bought') }}" class="btn btn-info pull-right"
-        role="button">Jualan Baru</a></h2>
+        role="button">Jualan Baru</a>      <a href="{{ url('/bought') }}" class="btn btn-info pull-right" role="button">Makanan terjual</a></h2>
+
       </div>
       <div class="panel-body">
         <div class="row">
@@ -31,12 +30,12 @@
                       <td>{{ $food->nama_makanan }}</td>  
                       <td>{{ $food->saiz_hidangan }}</td>
                       <td>{{ $food->harga }}</td>
-                      <td>{{ $food->state->name }}, {{ $food->district->name}}</td>
+                      <td>{{ $food->location }}</td>
                       <td>
                         @if( $food->user_id == Auth::user()->id)
                           
                           <a href="{{ action('FoodsController@edit', $food->id) }}"
-                            class="btn btn-primary btn-sm">Edit</a>
+                            class="btn btn-success btn-sm">Edit</a>
                            <a href="{{ action('FoodsController@destroy', $food->id) }}"
                              class="btn btn-danger btn-sm" id="confirm-modal">Delete</a>
                         @endif

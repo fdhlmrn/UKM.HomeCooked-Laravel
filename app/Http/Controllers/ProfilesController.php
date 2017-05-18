@@ -23,11 +23,12 @@ class ProfilesController extends Controller
      */
     public function index()
     {
-        //
+        $nowOnline = User::where('id', Auth::user()->id)->first();
+        $user = User::where('id', Auth::user()->id)->first();
         $reviews = Review::where('profile_id', Auth::user()->id)->get()->sortByDesc('created_at');
         $profiles = Profile::where('user_id', Auth::user()->id)->get();
-// dd($profiles);
-        return view ('profile.profile', compact('profiles'))->with('reviews', $reviews);
+        // dd($profiles);
+        return view ('profile.profile', compact('profiles'))->with('reviews', $reviews)->with('user', $user)->with('usernow', $nowOnline);
     }
 
     /**
@@ -37,7 +38,6 @@ class ProfilesController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -48,7 +48,6 @@ class ProfilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -59,11 +58,13 @@ class ProfilesController extends Controller
      */
     public function show($id)
     {
-        //
         $reviews = Review::where('profile_id', $id)->orderBy('created_at', 'desc')->paginate(4);
         $profile = Profile::where('user_id', $id)->first();
+        $user = User::where('id', $id)->first();
+        $nowOnline = User::where('id', Auth::user()->id)->first();
+
         // dd($profiles);
-        return view ('profile.details', compact('profile'))->with('reviews', $reviews);
+        return view ('profile.details', compact('profile'))->with('reviews', $reviews)->with('user', $user)->with('usernow', $nowOnline);
 
 
     }
@@ -77,9 +78,9 @@ class ProfilesController extends Controller
     public function edit($id)
     {
         //
-        $states = State::all();
+        $user = User::where('id', Auth::user()->id)->first();
         $profile = Profile::findorFail($id);
-        return view('profile.editprofile', compact('profile'))->with('states', $states);
+        return view('profile.editprofile', compact('profile'))->with('user', $user);
     }
 
     /**
@@ -91,19 +92,27 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        // dd(User::first());
-        $state = State::where('id', $request->state)->first();
-        $district = District::where('id', $request->district)->first();
         $user = User::findOrFail($id);
         $profile = Profile::where('user_id', $id)->first();
           $user->name = $request->name;
           $user->email = $request->email;
           $profile->no_phone = $request->no_phone;
           $profile->address = $request->address;
-          $profile->state = $state->name;
-          $profile->district = $district->name;
+          $profile->location = $request->location;
+          $profile->latitude = $request->latitude;
+          $profile->longitude = $request->longitude;
           // dd($profile);
+
+        if ($request->hasFile('image')){
+          $this->validate($request, [
+                'image' => 'required|image'
+        ]);
+        $image = '/images/user/user_' . time() . $user->id . '.' . $request->image->getClientOriginalExtension();
+          $request->image->move(public_path('images/user/'), $image);
+          $user->image = $image;
+        }
+        // dd($user);
+
           $user->save();
           $profile->save();
 
@@ -133,14 +142,18 @@ class ProfilesController extends Controller
     }
 
     public function getBought() {
-        $boughts = Bought::where('seller_id',  Auth::user()->id)->get()->sortByDesc('created_at');
-        foreach ($boughts as $bought) {
-            $buyer = User::where('id', $bought->buyer_id)->first();
-            $food = Food::where('id', $bought->food_id)->first();
-        }
 
-        // dd($food);
-        return view('jualan.sold', compact('boughts'))->with('buyer', $buyer)->with('food', $food);
+
+        $boughts = Bought::where('seller_id',  Auth::user()->id)->get()->sortByDesc('created_at');
+        // $user = Auth::user()->id;
+        // $bought = Bought::where('seller_id', '=', '6')->get();
+        // dd($user);
+
+        // foreach ($boughts as $bought) {
+        //     dd($bought->user);
+        // }
+        // // dd($boughts->user);
+        return view('jualan.sold', compact('boughts'));
     }
 
     public function testEmel($id){
