@@ -29,7 +29,7 @@
                 <input class="form-control" id="longitude" type="hidden" name="longitude">
             <div class="form-group">
                 <div class="col-sm-offset-9 col-sm-10">
-                  <a href="{{ url('/home') }}" class="btn btn-danger">List All</a>
+                  <a href="{{ url('/home') }}" class="btn btn-info">List All</a>
                   <button type="submit" class="btn btn-success">Search</button>
                 </div>
               </div>

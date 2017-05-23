@@ -2,8 +2,8 @@
 @include('modal.destroy-modal')
 
 @section('content')
-  <div class="card card-nav-tabs card-plain">
-    <div class="header header-danger">
+  <div class="panel panel-default">
+    <div class="panel-heading">
     <div class="tim-typo"><h2>List of Foods</h2></div>
 
       </div>
