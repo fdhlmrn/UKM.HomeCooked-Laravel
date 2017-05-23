@@ -4,7 +4,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Ubah Makanan</h2>
+      <h2>Edit Food</h2>
           </div>
     <div class="panel-body">
         <div class="row">
@@ -27,7 +27,7 @@
 
 
             <div class="form-group">
-              <label style="font-size: 15px;" class="col-md-3 control-label">Nama Makanan</label>
+              <label style="font-size: 15px;" class="col-md-3 control-label">Food's Name</label>
               <div class="col-md-8">
                 <input class="form-control" type="text" value="{{$food->nama_makanan}}" name="nama_makanan">
               </div>
@@ -35,13 +35,13 @@
 
 
             <div class="form-group">
-              <label style="font-size: 15px;" class="col-md-3 control-label">Saiz Hidangan</label>
+              <label style="font-size: 15px;" class="col-md-3 control-label">Serving Size</label>
               <div class="col-md-8">
                 <input class="form-control" type="text" value="{{$food->saiz_hidangan}}" name="saiz_hidangan">
               </div>
             </div>
             <div class="form-group">
-              <label style="font-size: 15px;" class="col-md-3 control-label">Harga</label>
+              <label style="font-size: 15px;" class="col-md-3 control-label">Price(RM)</label>
               <div class="col-md-8">
                 <input class="form-control" type="text" value="{{$food->harga}}" name="harga">
               </div>

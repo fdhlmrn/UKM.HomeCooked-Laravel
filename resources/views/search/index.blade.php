@@ -3,7 +3,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Cari Makanan</h2>
+      <h2>Find Food</h2>
           </div>
     <div class="panel-body"> 
       <div class="row">
@@ -12,7 +12,7 @@
                                 {{ csrf_field() }}
 
             <div class="form-group">
-              <label style="font-size: 15px;" class="col-md-3 control-label">Perincian Makanan</label>
+              <label style="font-size: 15px;" class="col-md-3 control-label">Food's Name</label>
               <div class="col-md-8">
                   <input class="form-control" type="text" name="keyword" placeholder="Nama Makanan">
               </div>
@@ -30,7 +30,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-9 col-sm-10">
                   <a href="{{ url('/home') }}" class="btn btn-danger">List All</a>
-                  <button type="submit" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success">Search</button>
                 </div>
               </div>
             </form>

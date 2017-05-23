@@ -4,7 +4,7 @@
 @section('content')
   <div class="card card-nav-tabs card-plain">
     <div class="header header-danger">
-    <div class="tim-typo"><h2>Senarai Makanan</h2></div>
+    <div class="tim-typo"><h2>List of Foods</h2></div>
 
       </div>
       <div class="panel-body">
@@ -17,11 +17,11 @@
                       <!--Table head-->
                       <thead>
                           <tr>
-                              <th>Gambar</th>
-                              <th>Makanan</th>
-                              <th>Siaz Hidangan</th>
-                              <th>Harga(RM)</th>
-                              <th>Lokasi</th>
+                              <th>Image</th>
+                              <th>Food's name</th>
+                              <th>Serving Size</th>
+                              <th>Price(RM)</th>
+                              <th>Location</th>
                               <th></th>
                           </tr>
                       </thead>

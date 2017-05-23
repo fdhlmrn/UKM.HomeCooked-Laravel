@@ -121,8 +121,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{url('foods')}}">Jualan</a></li>
-                        <li><a href="{{url('search')}}">Cari Makanan</a></li>
+                        <li><a href="{{url('foods')}}">Sales</a></li>
+                        <li><a href="{{url('search')}}">Find Food</a></li>
                         <li><a href="{{url('profiles')}}">Profile</a></li>
 
                     </ul>
@@ -131,7 +131,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('login') }}">Log In</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                         <li>

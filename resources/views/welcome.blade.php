@@ -5,9 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>HomeCooked</title>
 
         <!-- Fonts -->
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
@@ -74,23 +75,23 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Menu Utama</a>
+                        <a href="{{ url('/home') }}">Main Menu</a>
                     @else
-                        <a href="{{ url('/login') }}">Log Masuk</a>
-                        <a href="{{ url('/register') }}">Daftar</a>
+                        <a href="{{ url('/login') }}">Login</a>
+                        <a href="{{ url('/register') }}">Register</a>
                     @endif
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    Home Cook
+                    HomeCooked
                 </div>
 
                 <div class="links">
-                    <a href="{{ url( '/foods' )}}">Jual Makanan</a>
-                    <a href="{{ url( '/search' )}}">Cari Makanan</a>
-                    <a href="{{ url( '/search' )}}">Profil</a>
+                    <a href="{{ url( '/foods' )}}">Sell Foods</a>
+                    <a href="{{ url( '/search' )}}">Find Foods</a>
+                    <a href="{{ url( '/search' )}}">Profile</a>
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Ubah Profil</h2>
+      <h2>Edit Profile</h2>
           </div>
     <div class="panel-body">
         <div class="row">
@@ -25,7 +25,7 @@
           </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label style="font-size: 15px;" class="col-md-4 control-label">Nama</label>
+              <label style="font-size: 15px;" class="col-md-4 control-label">Name</label>
               <div class="col-md-8">
                 <div class="form-group">
                 <input class="form-control" type="text" value="{{$profile->user->name}}" name="name">
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Nombor Telefon</label>
+              <label class="col-md-4 control-label">Phone Number</label>
               <div class="col-md-8">
                 <div class="form-group">
                 <input class="form-control" type="text" value="{{$profile->no_phone}}" name="no_phone">
@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-4 control-label">Alamat</label>
+              <label class="col-md-4 control-label">Address</label>
               <div class="col-md-8">
                 <div class="form-group">
                 <input class="form-control" type="text" value="{{$profile->address}}" name="address">

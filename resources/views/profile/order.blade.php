@@ -4,12 +4,12 @@
 
  <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Order</h2>
+      <h2>Orders</h2>
 
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-12">
+        <div class="col-md-12">
             <div class="table-responsive">
               @foreach($orders as $order)
                 <div class="card card-block">
@@ -22,13 +22,13 @@
                 <thead>
 
                   <tr>
-                    <th width="15%">Pembeli</th>
-                    <th width="15%">No Phone</th>
+                    <th width="15%">Seller</th>
+                    <th width="15%">Phone Number</th>
                     <th width="15%">Address</th>
                     <th width="25%">Location</th>
-                    <th width="35%">Makanan</th>
-                    <th width="15%">Saiz Hidangan</th>
-                    <th width="15%">Harga(RM)</th>
+                    <th width="35%">Food's Name</th>
+                    <th width="15%">Serving Size</th>
+                    <th width="15%">Price(RM)</th>
                   </tr>
                 </thead>
                 <tbody pull-right>

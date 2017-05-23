@@ -223,7 +223,7 @@ class FoodsController extends Controller
 
         // $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
 
-        return redirect()->action('HomeController@index')->withMessage('Makanan telah dikemaskini');
+        return redirect()->back('HomeController@index')->withMessage('Makanan telah dikemaskini');
     }
 
     public function carthome(Request $request, $id)

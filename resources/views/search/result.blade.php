@@ -5,7 +5,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Cari Makanan</h2>
+      <h2>Find Food</h2>
 
       </div>
       <div class="panel-body">
@@ -15,11 +15,11 @@
               <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Gambar</th>
-                        <th>Makanan</th>
-                        <th>Siaz Hidangan</th>
-                        <th>Harga(RM)</th>
-                        <th>Lokasi</th>
+                        <th>Image</th>
+                        <th>Food's Name</th>
+                        <th>Serving Size</th>
+                        <th>Price(RM)</th>
+                        <th>Location</th>
                         <th></th>
                     </tr>
                 </thead>

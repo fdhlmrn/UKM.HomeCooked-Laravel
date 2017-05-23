@@ -6,7 +6,7 @@
   </div>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Tambah Makanan</h2>
+      <h2>Add Food</h2>
           </div>
     <div class="panel-body">
         <div class="row">
@@ -31,7 +31,7 @@
               <div class="col-md-10">
                 <label class="has-float-label">
                   <input class="form-control" type="text" name="nama_makanan" placeholder=" ">
-                  <span>Nama makanan</span>
+                  <span>Food's Name</span>
                 </label>
               </div>
             </div>
@@ -40,7 +40,7 @@
               <div class="col-md-10">
                 <label class="has-float-label">
                   <input class="form-control" type="text" name="saiz_hidangan" placeholder=" ">
-                  <span>Saiz Hidangan</span>
+                  <span>Serving Size</span>
                 </label>
               </div>
             </div>
@@ -49,7 +49,7 @@
               <div class="col-md-10">
                 <label class="has-float-label">
                   <input class="form-control" type="text" name="harga" placeholder=" ">
-                  <span>Harga</span>
+                  <span>Price(RM)</span>
                 </label>
               </div>
             </div>

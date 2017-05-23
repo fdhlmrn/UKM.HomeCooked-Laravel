@@ -5,7 +5,7 @@
 
  <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Makanan Terjual</h2>
+      <h2>Sold Foods</h2>
 
       </div>
       <div class="panel-body">
@@ -15,11 +15,11 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th width="15%">Pembeli</th>
-                    <th width="15%">No Phone</th>
-                    <th width="35%">Makanan</th>
-                    <th width="15%">Saiz Hidangan</th>
-                    <th width="15%">Harga(RM)</th>
+                    <th width="15%">Buyer</th>
+                    <th width="15%">Phone Number</th>
+                    <th width="35%">Food's Name</th>
+                    <th width="15%">Serving Size</th>
+                    <th width="15%">Price(RM)</th>
                   </tr>
                 </thead>
                 <tbody pull-right>

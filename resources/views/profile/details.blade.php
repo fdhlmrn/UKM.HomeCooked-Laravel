@@ -3,7 +3,7 @@
 @section('content')
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2>Profil </h2>
+    <h2>Profile </h2>
   </div>
   <div class="panel-body">
     <div class="row">
@@ -28,7 +28,7 @@
               <div class="form-group">
                 <div class="col-sm-offset-10 ">
                 @if ($profile->user_id == Auth::user()->id)
-                  <a href="{{ action('ProfilesController@edit', $profile->user_id) }}" class="btn btn-success">Edit</a>
+                  <a href="{{ action('ProfilesController@edit', $profile->user_id) }}" class="btn btn-success">Edit Profile</a>
 
                 @else
 
@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-6"><h2 class="pull-left">Comments</h2></div>
+          <div class="col-md-6"><h2 class="pull-left">Comment</h2></div>
           <div class=" form-group col-sm-12 col-md-12">
 
             @if ($profile->user_id != Auth::user()->id)
@@ -78,7 +78,7 @@
               <input class="form-control" name="title" placeholder="Title">
 
                 <textarea class ="form-control" name="content" placeholder="Enter your post" rows="4" value="{{ old('post_content') }}" maxlength="500"></textarea>
-                <p class="text-muted">Maxmimum character is 500</p>
+                <p class="text-muted">Number of maximum character is 500</p>
                 <button type="submit" class="btn btn-success pull-right">Reply</button>
                 </form>
 

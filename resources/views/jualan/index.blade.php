@@ -3,8 +3,8 @@
 @section('content')
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h2>Jualan<a href="{{ url('/foods/create') }}" class="btn btn-info pull-right"
-        role="button">Jualan Baru</a>      <a href="{{ url('/bought') }}" class="btn btn-info pull-right" role="button">Makanan terjual</a></h2>
+      <h2>Sales<a href="{{ url('/foods/create') }}" class="btn btn-info pull-right"
+        role="button">Add New Food</a>      <a href="{{ url('/bought') }}" class="btn btn-info pull-right" role="button">Sold Foods</a></h2>
 
       </div>
       <div class="panel-body">
@@ -15,10 +15,10 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th width="35%">Makanan</th>
-                    <th width="15%">Saiz Hidangan</th>
-                    <th width="15%">Harga(RM)</th>
-                    <th width="15%">Lokasi</th>
+                    <th width="35%">Food's Name</th>
+                    <th width="15%">Serving Size</th>
+                    <th width="15%">Price(RM)</th>
+                    <th width="15%">Location</th>
                     <th width="15%">Action</th>
                   </tr>
                 </thead>
