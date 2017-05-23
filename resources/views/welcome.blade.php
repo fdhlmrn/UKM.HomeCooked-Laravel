@@ -93,7 +93,12 @@
                     <a href="{{ url( '/search' )}}">Find Foods</a>
                     <a href="{{ url( '/search' )}}">Profile</a>
                 </div>
+
             </div>
+            <footer style="bottom: 0; position: fixed;margin: 0;margin-right: auto;" class="content">
+            <div class="footer-bottom">                    
+                    Special thoughts to Ummi, Aminurizam, Rahim, Azwan, Asyraf, Junaidi Aziz, Khai Rahman, Chot, Lab Mates and SEIS. 
+            </div></footer>
         </div>
     </body>
 </html>
