@@ -18,9 +18,9 @@ class CreateProfilesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('no_phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('state')->nullable();
-            $table->string('district')->nullable();
-            $table->string('subdistrict')->nullable();
+            $table->float('latitude');
+            $table->float('longitude');
+            $table->string('location')->nullable();
             $table->timestamps();
 
 

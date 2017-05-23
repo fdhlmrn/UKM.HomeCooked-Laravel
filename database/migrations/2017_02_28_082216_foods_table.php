@@ -16,8 +16,9 @@ class FoodsTable extends Migration
       Schema::create('foods', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('user_id')->index()->unsigned();
-          $table->integer('state_id')->index()->unsigned();
-          $table->integer('district_id')->index()->unsigned();
+          $table->float('latitude')->nullable();
+          $table->float('longitude')->nullable();
+          $table->string('location')->nullable();
           $table->string('nama_makanan');
           $table->integer('saiz_hidangan');
           $table->string('image');
