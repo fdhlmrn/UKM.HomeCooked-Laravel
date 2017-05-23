@@ -35,17 +35,7 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label class="col-md-4 control-label">Harga Makanan</label>
-              <div class="col-md-8">
-                <div class="form-group">
-                  @foreach($states as $state )
-                  <option value="{{ $state->id }}">{{ $state->name }}</option>
-                @endforeach
-                </div>
-              </div>
-              
-            </div>
+
             <div class="form-group">
                 <div class="col-sm-offset-10 col-sm-10">
                   <a href="{{ action('SearchController@index') }}" class="btn btn-default">Cancel</a>
@@ -57,4 +47,6 @@
         </div>
       </div>
     </div>
+
+
   @endsection

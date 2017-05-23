@@ -76,6 +76,7 @@
     </div>
 
 @section('script')
+
     <script>
 
       $(function() {
@@ -126,7 +127,6 @@
             $('#longitude').val(longitude); //amik nilai long
             // $('.form-control').css('border', '2px solid red');
 
-
             geocodeLatLng(geocoder, map, infoWindow); //geocode latitude dan longtiude
 
 
@@ -152,6 +152,7 @@
 
 
       } // close of init map
+
 
       function geocodeLatLng(geocoder, map, infowindow) {
         var latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};

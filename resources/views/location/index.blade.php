@@ -1,69 +1,24 @@
-@include('modal.destroy-modal')
-@extends('layouts.app')
-@section('content')
-
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
     <div id="map"></div>
-    <script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
 
-    $(function() {
-       $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    });
-   
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-      var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 15
-        });
-        infoWindow = new google.maps.InfoWindow;
+<script>
+var p1 = new google.maps.LatLng(2.919307, 101.772102);
+var p2 = new google.maps.LatLng(2.999165, 101.785463);
 
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
+alert(calcDistance(p1, p2));
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-            var jqXHR = $.ajax({
-              method: 'POST',
-              url: '{{ route('handle.location') }}',
-              data: {
-                latitude: pos.lat,
-                longitude: pos.lng
-              }
-            });
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
+//calculates distance between two points in km's
+function calcDistance(p1, p2) {
+  return (google.maps.geometry.spherical.computeDistanceBetween(p1, p2) / 1000).toFixed(2);
+}
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoMfIZfonCCMPWHqEwoKUIvAHHdoFRnG4&callback=initMap">
-    </script>
-  
-@endsection
+</script>
+</body>
+</html>
+
+

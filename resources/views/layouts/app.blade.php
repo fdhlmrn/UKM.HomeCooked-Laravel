@@ -200,7 +200,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1nhzyIsw68EpdGSDJEzZ4nm1Qsld6Ro8&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1nhzyIsw68EpdGSDJEzZ4nm1Qsld6Ro8&callback=initMap&libraries=geometry">
     </script>
     <script>
       $(document).on("click", "#confirm-modal", function(e) {

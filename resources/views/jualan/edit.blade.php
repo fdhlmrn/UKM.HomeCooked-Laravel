@@ -117,7 +117,6 @@
             $('#longitude').val(longitude); //amik nilai long
             // $('.form-control').css('border', '2px solid red');
 
-
             // geocodeLatLng(geocoder, map, infoWindow); //geocode latitude dan longtiude
             geocodeLatLng(geocoder); //geocode latitude dan longtiude
 
@@ -141,9 +140,6 @@
           handleLocationError(false, infoWindow, map.getCenter());
           handleLocationError(false);
         }
-
-
-
 
       } // close of init map
 

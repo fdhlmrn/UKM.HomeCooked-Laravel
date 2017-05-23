@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Food;
 use Illuminate\Support\Facades\Auth;
-use App\State;
+// use App\State;
 use Charts;
 use App\Cart;
 use App\Bought;
@@ -60,28 +60,28 @@ class FoodsController extends Controller
     public function create()
     {
         //
-        $states = State::all();
+        // $states = State::all();
 
-        return view('jualan.create', compact('states'));
+        return view('jualan.create');
 
     }
 
-    public function ajax()
-    {
-      $state_id = Input::get('state_id');
-      $district = District::where('state_id', '=', $state_id)->get();
+    // public function ajax()
+    // {
+    //   $state_id = Input::get('state_id');
+    //   $district = District::where('state_id', '=', $state_id)->get();
 
-      return \Response::json($district);
-    }
+    //   return \Response::json($district);
+    // }
 
-    public function ajax2()
-    {
+    // public function ajax2()
+    // {
       
-      $state_id = Input::get('state_id');
-      $district = District::where('state_id', '=', $state_id)->get();
+    //   $state_id = Input::get('state_id');
+    //   $district = District::where('state_id', '=', $state_id)->get();
 
-      return \Response::json($district);
-    }
+    //   return \Response::json($district);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -221,7 +221,7 @@ class FoodsController extends Controller
 
         $request->session()->put('cart', $cart);
 
-        $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
+        // $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
 
         return redirect()->action('HomeController@index')->withMessage('Makanan telah dikemaskini');
     }
@@ -250,7 +250,7 @@ class FoodsController extends Controller
 
         $request->session()->put('cart', $cart);
 
-        $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
+        // $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
 
         return redirect()->action('FoodsController@getCart')->withMessage('Makanan telah dikemaskini');
     }
@@ -344,7 +344,7 @@ class FoodsController extends Controller
           $makanan = Food::findorFail($id);
           $quantity = $cart['qty'];
 
-          if ($makanan->saiz_hidangan <= $quantity) {
+          if ($makanan->saiz_hidangan < $quantity) {
             return redirect()->back()->withErrors('Makanan dibeli orang lain');
           }
 

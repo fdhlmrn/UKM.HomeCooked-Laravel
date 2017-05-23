@@ -29,9 +29,7 @@ class HomeController extends Controller
     {
         // $foods = Food::with('state', 'district')->orderBy('created_at', 'desc')->paginate(7);
 
-        $foods = Food::with('state', 'district')->where([
-           ['saiz_hidangan', '>', '0'],
-          ])->orderBy('created_at', 'asc')->paginate(7);
+        $foods = Food::where('saiz_hidangan', '>', '0')->orderBy('created_at', 'asc')->paginate(7);
         // dd($foods);
         // dd($foods)
         return view('home', compact('foods'));
@@ -41,7 +39,7 @@ class HomeController extends Controller
 
     public function error()
     {
-        $foods = Food::with('state', 'district')->where([
+        $foods = Food::all()->where([
            ['saiz_hidangan', '>', '0'],
           ])->orderBy('created_at', 'asc')->paginate(7);
 

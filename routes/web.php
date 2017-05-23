@@ -43,7 +43,7 @@ Route::group(['middleware'=> ['auth']], function() {
 
     //search
     Route::get('/search', 'SearchController@index');
-    Route::get('/search/find', 'SearchController@find');
+    Route::post('/search/find', 'SearchController@find');
 
     //profiles
     Route::get('/profiles', 'ProfilesController@index');

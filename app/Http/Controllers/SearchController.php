@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Food;
-use App\State;
-use App\District;
-use App\SubDistrict;
 
 class SearchController extends Controller
 {
@@ -19,28 +16,68 @@ class SearchController extends Controller
     public function index()
     {
         //
-        $states = State::all();
+        // $states = State::all();
 
-        return view('search.index')->with('states', $states);
+        return view('search.index');
     }
 
-    public function ajax()
-    {
-      $state_id = Input::get('state_id');
-      $district = District::where('state_id', '=', $state_id)->get();
+    // public function ajax()
+    // {
+    //   $state_id = Input::get('state_id');
+    //   $district = District::where('state_id', '=', $state_id)->get();
 
-      return \Response::json($district);
-    }
+    //   return \Response::json($district);
+    // }
 
-    public function find()
+    public function find( Request $request)
     {
+
         $keyword=Input::get('keyword');
-        $location=Input::get('location');
-        $foods = Food::where([
+        $lat = $request->latitude;
+        $lng = $request->longitude;
+        $distance = 5;
+
+
+
+        $query = Food::getByDistance($lat, $lng, $distance);
+        // dd($query);
+
+        if(empty($query)) {
+         $foods = Food::where('saiz_hidangan', '>', '0')->orderBy('created_at', 'asc')->paginate(7);
+        // dd($foods);
+        // dd($foods)
+        return view('home', compact('foods'));
+        }
+
+        $ids = [];
+
+        foreach($query as $q)
+        {
+
+             array_push($ids, $q->id);
+        }
+        // dd($ids);
+            $foods = Food::whereIn('id', $ids)->where([
             ['nama_makanan', 'LIKE', "%$keyword%"],
             ['saiz_hidangan', '>', "0"],
-            ['location', 'LIKE', "%$location%"],
             ])->paginate(5);
+        // $results = \DB::table('foods')->whereIn( 'id', $ids)->orderBy('rating', 'DESC')->paginate(3);     
+        // $foods = Food::where([
+        //     ['id', '=', $ids],
+        //     ['nama_makanan', 'LIKE', "%$keyword%"],
+        //     ['saiz_hidangan', '>', "0"],
+        //     ])->paginate(5);   
+
+
+
+        // dd($foods);
+
+
+        // $foods = Food::where([
+        //     ['nama_makanan', 'LIKE', "%$keyword%"],
+        //     ['saiz_hidangan', '>', "0"],
+        //     ['location', 'LIKE', "%$location%"],
+        //     ])->paginate(5);
         
 
         // $state=Input::get('state');

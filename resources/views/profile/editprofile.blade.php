@@ -25,7 +25,7 @@
           </div>
         <div class="col-md-6">
             <div class="form-group">
-              <label class="col-md-4 control-label">Nama</label>
+              <label style="font-size: 15px;" class="col-md-4 control-label">Nama</label>
               <div class="col-md-8">
                 <div class="form-group">
                 <input class="form-control" type="text" value="{{$profile->user->name}}" name="name">
